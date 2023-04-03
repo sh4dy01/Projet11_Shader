@@ -17,17 +17,19 @@ Shader "Learning/Unlit/Arthur_ShaderExo"
             #include "UnityCG.cginc"
 
 			float4 _MainColor;
-			
+
+			// Data de chaque vertex
 			struct vertexInput
             {
                 float4 vertex : POSITION;
-			    float4 color : COLOR;
+			    float4 vertexColor : COLOR;
             };
-			
+
+			// Vertex to fragment (v2f)
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+                float4 vertexColor : COLOR;
             };
 			
             // VERTEX SHADER
@@ -37,7 +39,7 @@ Shader "Learning/Unlit/Arthur_ShaderExo"
             {
                 v2f o;
 	            o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // LIGNE OBLIGATOIRE. Calcul la position du vertex dans l'espace écran
-                o.color = v.color;
+                o.vertexColor = v.vertexColor;
                 return o;
             }
 
@@ -47,7 +49,7 @@ Shader "Learning/Unlit/Arthur_ShaderExo"
             {
             	//return float4(1,1,0,1);
             	//return _MainColor;
-                return i.color;
+                return i.vertexColor;
             }
             
             ENDHLSL

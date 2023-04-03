@@ -6,18 +6,21 @@ public class SimpleMeshGenerator : MonoBehaviour
 {
     public Material _MeshMaterial;
 
-    void Start()
+    private void Start()
     {
         //MakeTriangle();
         
     }
 
-    void MakeTriangle()
+    private void MakeTriangle()
     {
-		// TO DO: Vertices array of type Vector3
-		// TO DO: Indices array of type int
+        Vector3[] vertices = new Vector3[3];
+        int[] indices = new int[3];
         
-		// TO DO: appeller la fonction BuildMesh avec les bons paramètres
+        // TO DO: Vertices array of type Vector3
+        // TO DO: Indices array of type int
+
+        // TO DO: appeller la fonction BuildMesh avec les bons paramètres
     }
 
     protected void BuildMesh(string gameObjectName, Vector3[] vertices, int[] indices, Vector2[] uvs = null)

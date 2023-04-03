@@ -41,6 +41,6 @@ public class SimpleMeshGenerator_Noah : MonoBehaviour
 		meshFilter.mesh.normals = normals;
 
 		// Apply the material.
-		meshRenderer.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Universal Render Pipeline/Lit"));
+		meshRenderer.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Learning/Unlit/Shader_Noah"));
 	}
 }

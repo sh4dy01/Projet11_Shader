@@ -5,6 +5,8 @@ using UnityEngine;
 public class Arthur_SimpleMeshGenerator : MonoBehaviour
 {
     public Material _MeshMaterial;
+    
+    
 
     private void Start()
     {
@@ -29,9 +31,9 @@ public class Arthur_SimpleMeshGenerator : MonoBehaviour
 
         Color[] colors = new Color[]
         {
-            Color.cyan,
             Color.red,
-            Color.green
+            Color.green,
+            Color.blue
         };
         
         BuildMesh("Triangle", vertices, indices, null, colors);
@@ -66,7 +68,7 @@ public class Arthur_SimpleMeshGenerator : MonoBehaviour
             0, 1, 2, 0, 2, 3,
             0, 2, 1, 0, 3, 2
         };
-        
+
         BuildMesh("Double Quad", vertices, indices);
     }
 

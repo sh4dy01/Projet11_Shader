@@ -164,14 +164,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 510454773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57df37b09cb5de949a9765c53dc47ae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 82ab66c8eec0e70428dad200f339830e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MeshMaterial: {fileID: 2100000, guid: d726e8c59bfcd774a98cde5369f063bc, type: 2}
-  TorusSides: 3
-  TorusRadius: 2
-  TorusHeight: 0.5
-  RecomputeTorus: 0
+  _MeshMaterial: {fileID: 2100000, guid: f4643a0f8a1165a47ab4eb419541cc10, type: 2}
 --- !u!1 &845408322
 GameObject:
   m_ObjectHideFlags: 0

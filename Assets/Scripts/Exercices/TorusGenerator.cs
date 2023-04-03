@@ -22,7 +22,6 @@ public class TorusGenerator : SimpleMeshGenerator
     {
         if (RecomputeTorus)
         {
-            RecomputeTorus = false;
             MakeTorus();
         }
     }

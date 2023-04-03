@@ -40,6 +40,6 @@ public class SimpleMeshGenerator : MonoBehaviour
         meshFilter.mesh.uv = uvs;
 
         // Apply the material.
-        mr.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        meshRenderer.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Universal Render Pipeline/Unlit"));
     }
 }

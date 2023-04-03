@@ -27,8 +27,44 @@ public class TorusGenerator : SimpleMeshGenerator
         }
     }
 
+    
+    int[] GetQuadIndices(int intOffset, int modulo)
+    {
+        return new int[]
+        {
+        (0 + intOffset) % modulo,
+        (1 + intOffset) % modulo,
+        (2 + intOffset) % modulo,
+        (1 + intOffset) % modulo,
+        (3 + intOffset) % modulo,
+        (2 + intOffset) % modulo,
+        (0 + intOffset) % modulo,
+        (2 + intOffset) % modulo,
+        (1 + intOffset) % modulo,
+        (1 + intOffset) % modulo,
+        (2 + intOffset) % modulo,
+        (3 + intOffset) % modulo
+        };
+    }
+
     void MakeTorus()
     {
-        //BuildMesh("Torus", vertices.ToArray(), indices.ToArray());
+        var vertices = new List<Vector3>();
+        var indices = new List<int>();
+
+        float angle = (2 * Mathf.PI) / TorusSides;
+        for (int i = 1; i <= TorusSides; i++)
+        {
+            float cos = Mathf.Cos(angle*i)*TorusRadius;
+            float sin = Mathf.Sin(angle*i)*TorusRadius;
+            
+            vertices.Add(new Vector3(cos,0,sin));
+            vertices.Add(new Vector3(cos,TorusHeight,sin));
+
+            var tab = GetQuadIndices((i - 1) * 2,TorusSides*2);
+            foreach (var number in tab) indices.Add(number);
+        }
+        
+        BuildMesh("Torus", vertices.ToArray(), indices.ToArray());
     }
 }

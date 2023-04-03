@@ -5,19 +5,73 @@ using UnityEngine;
 public class SimpleMeshGenerator : MonoBehaviour
 {
     public Material _MeshMaterial;
+    
+
 
     void Start()
     {
-        //MakeTriangle();
-        
     }
 
     void MakeTriangle()
     {
-		// TO DO: Vertices array of type Vector3
-		// TO DO: Indices array of type int
+        Vector3[] vertices = new Vector3[3];
+        int[] tab = new int[3];
+
+        vertices[0] = new Vector3(0,0,0);
+        vertices[1] = new Vector3(1,1,0);
+        vertices[2] = new Vector3(2,0,0);
+
+        tab[0] = 0;
+        tab[1] = 1;
+        tab[2] = 2;
+
+        BuildMesh("test", vertices, tab);
+    }
+
+    void MakeCube()
+    {
+        Vector3[] vertices = new[]
+        {
+            new Vector3(0,0,0),
+            new Vector3(0,1,0),
+            new Vector3(1,1,0),
+            new Vector3(1,0,0),
+            new Vector3(0,0,1),
+            new Vector3(0,1,1),
+            new Vector3(1,0,1),
+            new Vector3(1,1,1)
+        };
+        int[] tab = new int[]
+        {
+            0,1,2,0,2,3,
+            3,2,7,3,7,6,
+            6,7,5,6,5,4,
+            4,5,1,4,1,0,
+            1,5,7,1,7,2,
+            4,0,3,4,3,6
+        };
         
-		// TO DO: appeller la fonction BuildMesh avec les bons paramètres
+        BuildMesh("cube", vertices, tab);
+    }
+    
+    
+
+    void MakeQuad()
+    {
+        Vector3[] vertices = new Vector3[4];
+        int[] tab = new int[6]
+        {
+            0,1,2,0,3,1
+        };
+
+        vertices[0] = new Vector3(0, 0, 0);
+        vertices[1] = new Vector3(1, 1, 0);
+        vertices[2] = new Vector3(1, 0, 0);
+        vertices[3] = new Vector3(0, 1, 0);
+        
+        
+
+        BuildMesh("test", vertices, tab);
     }
 
     protected void BuildMesh(string gameObjectName, Vector3[] vertices, int[] indices, Vector2[] uvs = null)

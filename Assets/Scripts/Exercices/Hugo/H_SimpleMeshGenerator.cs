@@ -28,8 +28,8 @@ public class H_SimpleMeshGenerator : MonoBehaviour
 
         Color[] colors = new Color[]
         {
-            Color.magenta,
             Color.cyan,
+            Color.magenta,
             Color.yellow
         };
         

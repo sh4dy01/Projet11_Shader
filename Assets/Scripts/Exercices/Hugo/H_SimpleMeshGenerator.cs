@@ -2,76 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleMeshGenerator : MonoBehaviour
+public class H_SimpleMeshGenerator : MonoBehaviour
 {
     public Material _MeshMaterial;
-    
 
-
-    void Start()
+    private void Start()
     {
+        MakeDoubleQuad();
     }
 
-    void MakeTriangle()
+    private void MakeTriangle()
     {
-        Vector3[] vertices = new Vector3[3];
-        int[] tab = new int[3];
-
-        vertices[0] = new Vector3(0,0,0);
-        vertices[1] = new Vector3(1,1,0);
-        vertices[2] = new Vector3(2,0,0);
-
-        tab[0] = 0;
-        tab[1] = 1;
-        tab[2] = 2;
-
-        BuildMesh("test", vertices, tab);
-    }
-
-    void MakeCube()
-    {
-        Vector3[] vertices = new[]
+        Vector3[] vertices = new Vector3[]
         {
-            new Vector3(0,0,0),
-            new Vector3(0,1,0),
-            new Vector3(1,1,0),
-            new Vector3(1,0,0),
-            new Vector3(0,0,1),
-            new Vector3(0,1,1),
-            new Vector3(1,0,1),
-            new Vector3(1,1,1)
-        };
-        int[] tab = new int[]
-        {
-            0,1,2,0,2,3,
-            3,2,7,3,7,6,
-            6,7,5,6,5,4,
-            4,5,1,4,1,0,
-            1,5,7,1,7,2,
-            4,0,3,4,3,6
+            new(0, 0, 0),
+            new(1f, 1.5f, 0),
+            new(2f, 0, 0)
         };
         
-        BuildMesh("cube", vertices, tab);
-    }
-    
-    
-
-    void MakeQuad()
-    {
-        Vector3[] vertices = new Vector3[4];
-        int[] tab = new int[6]
+        // Doit être un multiple de 3
+        int[] indices = new int[]
         {
-            0,1,2,0,3,1
+            0, 1, 2
         };
+        
+        BuildMesh("Triangle", vertices, indices);
+    }
 
+    private void MakeQuad()
+    {   
+        Vector3[] vertices = new Vector3[6];
         vertices[0] = new Vector3(0, 0, 0);
-        vertices[1] = new Vector3(1, 1, 0);
-        vertices[2] = new Vector3(1, 0, 0);
-        vertices[3] = new Vector3(0, 1, 0);
-        
-        
+        vertices[1] = new Vector3(0, 2, 0);
+        vertices[2] = new Vector3(2, 2, 0);
+        vertices[3] = new Vector3(2, 0, 0);
 
-        BuildMesh("test", vertices, tab);
+        int[] indices = new int[]
+        {
+            0, 1, 2, 0, 2, 3
+        };
+        
+        BuildMesh("quad", vertices, indices);
+    }
+
+    private void MakeDoubleQuad()
+    {
+        Vector3[] vertices = new Vector3[6];
+        vertices[0] = new Vector3(0, 0, 0);
+        vertices[1] = new Vector3(0, 2, 0);
+        vertices[2] = new Vector3(2, 2, 0);
+        vertices[3] = new Vector3(2, 0, 0);
+        
+        int[] indices = new int[]
+        {
+            0, 1, 2, 0, 2, 3,
+            0, 2, 1, 0, 3, 2
+        };
+        
+        BuildMesh("double quad", vertices, indices);
     }
 
     protected void BuildMesh(string gameObjectName, Vector3[] vertices, int[] indices, Vector2[] uvs = null)

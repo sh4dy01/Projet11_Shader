@@ -10,8 +10,8 @@ public class Arthur_SimpleMeshGenerator : MonoBehaviour
 
     private void Start()
     {
-        MakeTriangle();
-        //MakeQuad();
+        //MakeTriangle();
+        MakeQuad();
         //MakeDoubleQuad();
     }
 
@@ -41,18 +41,38 @@ public class Arthur_SimpleMeshGenerator : MonoBehaviour
 
     private void MakeQuad()
     {   
-        Vector3[] vertices = new Vector3[6];
+        Vector3[] vertices = new Vector3[12];
         vertices[0] = new Vector3(0, 0, 0);
         vertices[1] = new Vector3(0, 2, 0);
         vertices[2] = new Vector3(2, 2, 0);
         vertices[3] = new Vector3(2, 0, 0);
+        
+        vertices[6] = new Vector3(0, 0, 2);
+        vertices[7] = new Vector3(0, 2, 2);
 
         int[] indices = new int[]
         {
-            0, 1, 2, 0, 2, 3
+            0, 1, 2, 0, 2, 3,
+            0, 1, 6, 1, 7, 6
         };
         
-        BuildMesh("Quad", vertices, indices);
+        Color[] colors = new Color[]
+        {
+            Color.red,
+            Color.green,
+            Color.blue,
+            Color.cyan,
+            Color.yellow,
+            Color.magenta,
+            Color.red,
+            Color.green,
+            Color.yellow,
+            Color.magenta,
+            Color.red,
+            Color.green
+        };
+        
+        BuildMesh("Quad", vertices, indices, null, colors);
     }
 
     private void MakeDoubleQuad()

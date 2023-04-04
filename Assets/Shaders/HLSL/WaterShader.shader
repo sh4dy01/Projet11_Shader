@@ -5,6 +5,7 @@ Shader "Learning/Unlit/Water"
 		// NOM_VARIABLE("NOM_AFFICHE_DANS_L'INSPECTOR", Shaderlab type) = defaultValue
 		_WaveAmplitude("Wave Amplitude", Range(0, 1)) = 0.2
 		_AlbedoTexture("Albedo", 2D) = "white" { }
+		_DispTexture("Disp", 2D) = "white" { }
 	}
 	
 	SubShader
@@ -37,13 +38,14 @@ Shader "Learning/Unlit/Water"
 
 			float _WaveAmplitude;
 			sampler2D _AlbedoTexture;
+			sampler2D _DispTexture;
 
 			PS_INPUT vert (VS_INPUT v)
 			{
 				PS_INPUT o;
 
 				o.vertex = v.vertex;
-				o.vertex.y += sin(o.vertex.x + _Time.y) *_WaveAmplitude;
+				o.vertex.y += sin(o.vertex.z - _Time.y) * _WaveAmplitude; // Wave effect.
 				o.vertex = mul(UNITY_MATRIX_MVP, o.vertex);
 
 				o.normal = float4(mul((float3x3) unity_ObjectToWorld, v.normal.xyz), 1.0F);
@@ -60,8 +62,11 @@ Shader "Learning/Unlit/Water"
 				float3 dir = normalize(_WorldSpaceCameraPos - i.pixelWorldPos.xyz);
 				float3 nor = normalize(i.normal.xyz);
 
-				float3 light = float3(0.2F, 0.5F, 1) * tex2D(_AlbedoTexture, i.texCoord);
+				// Use displacement map to warp texture, and animate according to time (Unity's "_Time.y" = current time).
+				float displace = tex2D(_DispTexture, i.texCoord - float2(-_Time.y, -_Time.y) * 0.1F).r * 0.2F;
+				float3 light = tex2D(_AlbedoTexture, i.texCoord + displace - float2(_Time.y, -_Time.y) * 0.1F) * tex2D(_AlbedoTexture, i.texCoord + _Time.y * 0.05F);
 
+				// Return water texture, with transparency according to camera angle.
 				return float4(light, 1.0F - dot(dir, nor));
 			}
 			

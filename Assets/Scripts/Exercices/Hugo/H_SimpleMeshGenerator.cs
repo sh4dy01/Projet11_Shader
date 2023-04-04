@@ -35,9 +35,9 @@ public class H_SimpleMeshGenerator : MonoBehaviour
         
         Vector2[] uvs = new Vector2[]
         {
-            new Vector2(0, 0),
-            new Vector2(0, 1),
-            new Vector2(1, 1)
+            new Vector2(0.1f, 0.6f),
+            new Vector2(0.25f, 0.9f),
+            new Vector2(0.4f, 0.6f)
         };
         
         BuildMesh("Triangle", vertices, indices, uvs, colors);

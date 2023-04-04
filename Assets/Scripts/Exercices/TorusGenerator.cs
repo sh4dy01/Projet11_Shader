@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class TorusGenerator : SimpleMeshGenerator  
 {
-    [Range(3, 30)]
+    [Range(3, 100)]
     public int TorusSides = 3;
-    [Range(1f, 3f)]
+    [Range(0f, 5f)]
     public float TorusRadius = 2f;
-    [Range(0.2f, 1f)]
+    [Range(0f, 5f)]
+    public float TorusUpperRadius = 2f;
+    [Range(0.2f, 5f)]
     public float TorusHeight = 0.5f;
 
     public bool RecomputeTorus = false;
@@ -22,7 +24,6 @@ public class TorusGenerator : SimpleMeshGenerator
     {
         if (RecomputeTorus)
         {
-            RecomputeTorus = false;
             MakeTorus();
         }
     }
@@ -51,20 +52,21 @@ public class TorusGenerator : SimpleMeshGenerator
     {
         var vertices = new List<Vector3>();
         var indices = new List<int>();
+        var colors = new List<Color>();
 
         float angle = (2 * Mathf.PI) / TorusSides;
         for (int i = 1; i <= TorusSides; i++)
         {
-            float cos = Mathf.Cos(angle*i)*TorusRadius;
-            float sin = Mathf.Sin(angle*i)*TorusRadius;
+            vertices.Add(new Vector3(Mathf.Cos(angle*i)*TorusRadius,0,Mathf.Sin(angle*i)*TorusRadius));
+            vertices.Add(new Vector3(Mathf.Cos(angle*i)*TorusUpperRadius,TorusHeight,Mathf.Sin(angle*i)*TorusUpperRadius));
+            colors.Add(new Color(0,0.02F*i,1));
+            colors.Add(new Color(0.02F*i,1,1));
             
-            vertices.Add(new Vector3(cos,0,sin));
-            vertices.Add(new Vector3(cos,TorusHeight,sin));
-
             var tab = GetQuadIndices((i - 1) * 2,TorusSides*2);
             foreach (var number in tab) indices.Add(number);
+            
         }
-        
-        BuildMesh("Torus", vertices.ToArray(), indices.ToArray());
+
+        BuildMesh("Torus", vertices.ToArray(), indices.ToArray(), null, colors.ToArray());
     }
 }

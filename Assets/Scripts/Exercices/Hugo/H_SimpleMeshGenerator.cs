@@ -8,7 +8,7 @@ public class H_SimpleMeshGenerator : MonoBehaviour
 
     private void Start()
     {
-        MakeDoubleQuad();
+        MakeTriangle();
     }
 
     private void MakeTriangle()
@@ -25,8 +25,15 @@ public class H_SimpleMeshGenerator : MonoBehaviour
         {
             0, 1, 2
         };
+
+        Color[] colors = new Color[]
+        {
+            Color.cyan,
+            Color.magenta,
+            Color.yellow
+        };
         
-        BuildMesh("Triangle", vertices, indices);
+        BuildMesh("Triangle", vertices, indices, null, colors);
     }
 
     private void MakeQuad()
@@ -62,7 +69,7 @@ public class H_SimpleMeshGenerator : MonoBehaviour
         BuildMesh("double quad", vertices, indices);
     }
 
-    protected void BuildMesh(string gameObjectName, Vector3[] vertices, int[] indices, Vector2[] uvs = null)
+    protected void BuildMesh(string gameObjectName, Vector3[] vertices, int[] indices, Vector2[] uvs = null, Color[] colors = null)
     {
         // Search in the scene if there is a GameObject called "gameObjectName". If yes, we destroy it.
         GameObject oldOne = GameObject.Find(gameObjectName);
@@ -80,6 +87,7 @@ public class H_SimpleMeshGenerator : MonoBehaviour
         meshFilter.mesh.vertices = vertices;
         meshFilter.mesh.triangles = indices;
         meshFilter.mesh.uv = uvs;
+        meshFilter.mesh.colors = colors;
 
         // Apply the material.
         meshRenderer.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Universal Render Pipeline/Unlit"));

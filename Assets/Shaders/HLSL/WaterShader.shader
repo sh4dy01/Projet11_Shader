@@ -45,14 +45,13 @@ Shader "Learning/Unlit/Water"
 				PS_INPUT o;
 
 				o.vertex = mul(unity_ObjectToWorld, v.vertex);
+				o.pixelWorldPos = o.vertex;
 				o.vertex.y += sin(o.vertex.z - _Time.y) * _WaveAmplitude; // Wave effect.
 				o.vertex = mul(UNITY_MATRIX_VP, o.vertex);
 
 				o.normal = float4(mul((float3x3) unity_ObjectToWorld, v.normal.xyz), 1.0F);
 
 				o.texCoord = v.texCoord;
-
-				o.pixelWorldPos = mul(unity_ObjectToWorld, v.vertex);
 
 				return o;
 			}

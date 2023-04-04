@@ -33,7 +33,14 @@ public class H_SimpleMeshGenerator : MonoBehaviour
             Color.yellow
         };
         
-        BuildMesh("Triangle", vertices, indices, null, colors);
+        Vector2[] uvs = new Vector2[]
+        {
+            new Vector2(0.1f, 0.6f),
+            new Vector2(0.25f, 0.9f),
+            new Vector2(0.4f, 0.6f)
+        };
+        
+        BuildMesh("Triangle", vertices, indices, uvs, colors);
     }
 
     private void MakeQuad()

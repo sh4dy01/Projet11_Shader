@@ -1,6 +1,6 @@
 Shader "Learning/Unlit/Reference"
 {
-    // Propriétés exposées dans l'inspector
+    // PropriÃ©tÃ©s exposÃ©es dans l'inspector
     // NE PAS OUBLIER DE FAIRE LE LIEN APRES DANS VOTRE CODE POUR Y ACCEDER
     Properties
     {   
@@ -19,12 +19,12 @@ Shader "Learning/Unlit/Reference"
 		Pass
         {
 			HLSLPROGRAM
-            #pragma vertex vert  // On définit le vertex shader. Nom de la fonction: vert (peut être changé)
-            #pragma fragment frag  // On définit le fragment shader. Nom de la fonction: frag (peut être changé)
+            #pragma vertex vert  // On dÃ©finit le vertex shader. Nom de la fonction: vert (peut Ãªtre changÃ©)
+            #pragma fragment frag  // On dÃ©finit le fragment shader. Nom de la fonction: frag (peut Ãªtre changÃ©)
 
             #include "UnityCG.cginc"
 			
-			// Ecrivez ici les variables exposées dans le bloc Properties
+			// Ecrivez ici les variables exposÃ©es dans le bloc Properties
             float _WaveScale, _ReflDistort;
             sampler2D _ShieldMap, _Re_SwordMapfractionTex;
             float4 _TintColorRefrColor, _WindDir;
@@ -48,9 +48,9 @@ Shader "Learning/Unlit/Reference"
             };
             */
 			
-            // Données qui vont être interpolées par le Rasterizer et qui seront en input du fragment shader
-            // Chaque variable de cette struct doit être calculée dans le vertex shader !
-            struct v2f   // v2f = vertex to fragment     ou p-e appelé vertexOutput
+            // DonnÃ©es qui vont Ãªtre interpolÃ©es par le Rasterizer et qui seront en input du fragment shader
+            // Chaque variable de cette struct doit Ãªtre calculÃ©e dans le vertex shader !
+            struct v2f   // v2f = vertex to fragment     ou p-e appelÃ© vertexOutput
             {
 	            float4 vertex : SV_POSITION; // => SV_POSITION signifie que c'est la position en clip space 
             };
@@ -58,13 +58,13 @@ Shader "Learning/Unlit/Reference"
             v2f vert(vertexInput v)
             {
 	            v2f o;
-	            o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // ETAPE OBLIGATOIRE DU VS. De l'espace objet à l'espace de clipping (écran)
+	            o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); // ETAPE OBLIGATOIRE DU VS. De l'espace objet Ã  l'espace de clipping (Ã©cran)
 	            return o;
             }
 
-            // Etape intermédiaire entre le VS et le FS, la rasterization. 
-            // Le GPU va déterminer les fragments couverts par les polygones, et les données transférées
-            // du VS au FS seront interpolées.
+            // Etape intermÃ©diaire entre le VS et le FS, la rasterization. 
+            // Le GPU va dÃ©terminer les fragments couverts par les polygones, et les donnÃ©es transfÃ©rÃ©es
+            // du VS au FS seront interpolÃ©es.
 
             // FRAGMENT SHADER: calcul la couleur finale du fragment/pixel
             float4 frag(v2f i) : SV_Target

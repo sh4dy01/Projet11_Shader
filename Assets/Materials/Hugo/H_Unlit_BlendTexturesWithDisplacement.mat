@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: H_Unlit_BlendTextures
-  m_Shader: {fileID: 4800000, guid: 1fc1a75822f36aa48bff576ad4b70866, type: 3}
+  m_Name: H_Unlit_BlendTexturesWithDisplacement
+  m_Shader: {fileID: 4800000, guid: af315685579f4bc46a0ab9dd08a283dd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,19 +24,18 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 792d3fef67503f547b88704e08149c93, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo2:
-        m_Texture: {fileID: 2800000, guid: fcc9df5d06644834dbca475fbe969497, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: 909a5b7a830ca5f478907602e0312045, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _Blend: 0.47
+    m_Floats: []
     m_Colors: []
   m_BuildTextureStacks: []

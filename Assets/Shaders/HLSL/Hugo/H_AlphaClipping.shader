@@ -47,7 +47,7 @@ Shader "Learning/Unlit/H_AlphaClipping"
             {
                 float4 text = tex2D(_Albedo, i.uv);
                 
-                if (text.a < 0.05)
+                if (text.a < 0.25)
                     discard; // Enlève le pixel du rendu
 
                 return text;

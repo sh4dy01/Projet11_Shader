@@ -10,6 +10,9 @@ Shader "Learning/Unlit/H_AlphaClipping"
     {
 		Pass
         {
+            //Désactive le culling -> on voit des deux côtés le model
+            Cull Off
+            
 			HLSLPROGRAM
             #pragma vertex vert  
             #pragma fragment frag
@@ -42,10 +45,10 @@ Shader "Learning/Unlit/H_AlphaClipping"
 
             float4 frag(v2f i) : SV_Target
             {
-                vector text = tex2D(_Albedo, i.uv);
+                float4 text = tex2D(_Albedo, i.uv);
                 
-                if (text.a < 0.5)
-                    discard;
+                if (text.a < 0.05)
+                    discard; // Enlève le pixel du rendu
 
                 return text;
             }

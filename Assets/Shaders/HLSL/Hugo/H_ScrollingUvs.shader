@@ -36,15 +36,13 @@ Shader "Learning/Unlit/H_ScrollingUvs"
             {
                 v2f o;
 	            o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-                o.uv = v.uv;
+                o.uv = v.uv + float2(_ScrollingSpeed.x * _Time.x, _ScrollingSpeed.y * _Time.x);
                 
                 return o;
             }
 
             float4 frag(v2f i) : SV_Target
             {
-                i.uv += _ScrollingSpeed * _Time.x;
-
                 return tex2D(_Albedo, i.uv);
             }
             

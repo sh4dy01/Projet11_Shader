@@ -40,7 +40,7 @@ Shader "Learning/Unlit/H_WorldGradient"
 
             float4 frag(v2f i) : SV_Target
             {
-                return tex2D(_Gradient, i.worldSpacePos.x); 
+                return tex2D(_Gradient, float2(i.worldSpacePos.x, 0)); 
             }
             
             ENDHLSL

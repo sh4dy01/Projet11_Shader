@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : DamageableEntity
 {
     [SerializeField] GameObject _shield;
     [SerializeField] GameObject _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
-
-    private int _life = 100;
-    private int _maxLife = 100;
-
-    void Update()
+    
+    private void Update()
     {
-        Shader.SetGlobalVector("_WorldSpacePlayerPos", transform.position);
-
+        //Shader.SetGlobalVector("_WorldSpacePlayerPos", transform.position);
+        
+        /*
         // Projectile
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -25,12 +21,16 @@ public class Player : MonoBehaviour
         // Shield
         if (Input.GetKeyDown(KeyCode.E))
             _shield.SetActive(!_shield.activeSelf);
+            */
     }
 
-    public void UpdateLife(int valueToAdd)
+    protected override void GetHitEffect()
     {
-        // clamp the life between 0 and MaxLife;
-        // if life == 0
-        //    Visual effect + disable the movements of the player, etc etc...
+        // player Visual effect
+    }
+    
+    protected override void Die()
+    {
+        // Respawn
     }
 }

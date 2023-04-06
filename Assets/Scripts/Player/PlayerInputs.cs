@@ -1,9 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
 
 namespace StarterAssets
 {
@@ -14,7 +10,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 
-		[Header("Movement Settings")]
+		[Header("Interaction Settings")]
 		[Range(1f, 50f)]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
@@ -25,6 +21,7 @@ namespace StarterAssets
 		
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;
+		private PlayerAttacks _playerAttacks;
 		
 		public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
@@ -32,6 +29,7 @@ namespace StarterAssets
 		{
 			_mainCamera = Camera.main;    
 			_navMeshAgent = GetComponent<NavMeshAgent>();
+			_playerAttacks = GetComponent<PlayerAttacks>();
 		}
 
 		private void Update()
@@ -39,6 +37,10 @@ namespace StarterAssets
 			if (Input.GetMouseButtonDown(0))
 			{
 				LeftClickInput();
+			}
+			else if (Input.GetMouseButtonDown(1))
+			{
+				RightClickInput();
 			}
 			
 			if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -57,13 +59,14 @@ namespace StarterAssets
 
 			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _clickableLayerMask))
 			{
+				_playerAttacks.ResetAttack();
+				
 				GameObject hitObject = hitInfo.collider.gameObject;
 				int layerId = hitObject.layer;
 				
 				if (layerId == LayerMask.NameToLayer("Ground"))
 				{
-					var newMoveDirection = hitInfo.point;
-					_navMeshAgent.SetDestination(newMoveDirection);
+					_navMeshAgent.SetDestination(hitInfo.point);
 				}
 				else if (layerId == LayerMask.NameToLayer("Collectibles"))
 				{
@@ -71,9 +74,18 @@ namespace StarterAssets
 				}
 				else if (layerId == LayerMask.NameToLayer("Enemies"))
 				{
-					//Attack enemy
+					Debug.Log("Enemy");
+					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
+					{
+						_playerAttacks.SetAttackTarget(enemy);
+					}
 				}
 			}
+		}
+
+		private void RightClickInput()
+		{
+			
 		}
 
 		public void SprintInput(bool value)

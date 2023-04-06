@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageableEntity : MonoBehaviour
 {
-    [SerializeField] private int _damage = 1;
+    [SerializeField] protected int _damage = 1;
     [SerializeField] private int _maxHealth = 5;
     private int _currentHealth;
     

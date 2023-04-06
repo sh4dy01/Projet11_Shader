@@ -110,7 +110,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
-        public bool IsWalking => _input.move == Vector2.zero;
+        public bool IsWalking => _input.move != Vector2.zero;
         public bool IsSprinting => _input.sprint;
 
         private bool IsCurrentDeviceMouse

@@ -44,11 +44,20 @@ public class PlayerHungerThirst : MonoBehaviour
             thirst *= _walkMultiplier;
         }
 
+        // Apply hunger and thirst.
         _hunger -= hunger;
         _thirst -= thirst;
-
-        Debug.Log(_hunger);
+        if (_hunger < 0.0F) _hunger = 0.0F;
+        if (_thirst < 0.0F) _thirst = 0.0F;
 
         OnUpdate?.Invoke();
+    }
+
+    public void EatAndDrink(float foodAmount, float beverageAmount)
+    {
+        _hunger += foodAmount;
+        _thirst += beverageAmount;
+        if (_hunger > 100.0F) _hunger = 100.0F;
+        if (_thirst > 100.0F) _thirst = 100.0F;
     }
 }

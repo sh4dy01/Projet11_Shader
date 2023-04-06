@@ -214,8 +214,8 @@ namespace StarterAssets
         {
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-            Debug.Log(_input.IsPathComplete());
-            if (_input.IsPathComplete()) targetSpeed = 0.0f;
+            if (_input.IsPathComplete()) 
+                targetSpeed = 0.0f;
             
             float speedOffset = 0.1f;
             float currentHorizontalSpeed = new Vector3(_input.NavMeshAgent.velocity.x, 0.0f, _input.NavMeshAgent.velocity.z).magnitude;

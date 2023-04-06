@@ -7,14 +7,12 @@ public class HUD : MonoBehaviour
 {
 	[SerializeField] private PlayerHungerThirst _playerHungerThirst;
 
-	//[SerializeField] private Image _hungerBar;
-	//[SerializeField] private Image _thirstBar;
+	[SerializeField] private Image _hungerBar;
+	[SerializeField] private Image _thirstBar;
 
-	//private Vector2 _baseSize;
 
 	private void Awake()
 	{
-		//_baseSize = _hungerBar.rectTransform.sizeDelta;
 		_playerHungerThirst.OnUpdate += UpdateValues;
 	}
 
@@ -25,7 +23,7 @@ public class HUD : MonoBehaviour
 
 	public void UpdateValues()
 	{
-		//_hungerBar.rectTransform.sizeDelta = _baseSize * new Vector2(_playerHungerThirst.Hunger / 100.0F, 1.0F);
-		//_thirstBar.rectTransform.sizeDelta = _baseSize * new Vector2(_playerHungerThirst.Thirst / 100.0F, 1.0F);
+		_hungerBar.fillAmount = _playerHungerThirst.Hunger / 100.0F;
+		_thirstBar.fillAmount = _playerHungerThirst.Thirst / 100.0F;
 	}
 }

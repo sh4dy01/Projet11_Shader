@@ -10,13 +10,11 @@ namespace StarterAssets
 	public class StarterAssetsInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
-		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
 
 		[Header("Movement Settings")]
-		public bool analogMovement;
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;
 		[Range(1f, 50f)]
@@ -29,11 +27,12 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
-		private void Start()
+		private void Awake()
 		{
 			_mainCamera = Camera.main;    
 			_navMeshAgent = GetComponent<NavMeshAgent>();
 		}
+		
 #if ENABLE_INPUT_SYSTEM
 
 		public void OnLook(InputValue value)
@@ -66,15 +65,22 @@ namespace StarterAssets
 			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _groundLayer.value))
 			{
 				var newMoveDirection = hitInfo.point;
-				move = newMoveDirection;
 				_navMeshAgent.SetDestination(newMoveDirection);
 			}
 		}
 		
-		public void MoveInput(Vector2 newMoveDirection)
+		public bool IsPathComplete()
 		{
-			//move = newMoveDirection;
-		} 
+			if (Vector3.Distance( _navMeshAgent.destination, transform.position) <= _navMeshAgent.stoppingDistance)
+			{
+				if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f)
+				{
+					return true;
+				}
+			}
+ 
+			return false;
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{

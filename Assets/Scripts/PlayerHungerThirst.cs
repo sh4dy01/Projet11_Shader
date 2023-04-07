@@ -12,7 +12,7 @@ public class PlayerHungerThirst : MonoBehaviour
 	[SerializeField] private float _walkMultiplier = 1.5F;
     [SerializeField] private float _sprintMultiplier = 4.0F;
 
-    private ThirdPersonController _thirdPersonController;
+    private PlayerMovement playerMovement;
 
     // Actual meters.
     private float _hunger = 100.0F;
@@ -26,19 +26,19 @@ public class PlayerHungerThirst : MonoBehaviour
 
     private void Awake()
     {
-        _thirdPersonController = GetComponent<ThirdPersonController>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
 	{
 		float hunger = _hungerBaseDegrade * Time.deltaTime;
         float thirst = _thirstBaseDegrade * Time.deltaTime;
-        if (_thirdPersonController.IsSprinting)
+        if (playerMovement.IsSprinting)
         {
             hunger *= _sprintMultiplier;
             thirst *= _sprintMultiplier;
         }
-        else if (_thirdPersonController.IsWalking)
+        else if (playerMovement.IsWalking)
         {
             hunger *= _walkMultiplier;
             thirst *= _walkMultiplier;

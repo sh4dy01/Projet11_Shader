@@ -6,18 +6,19 @@ TagManager:
   tags:
   - CinemachineTarget
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Entity
+  - Enemies
   - Water
   - UI
   - Trigger
   - Ground
-  - 
-  - 
-  - 
+  - Collectibles
+  - Projectile
+  - Player
   - 
   - 
   - 

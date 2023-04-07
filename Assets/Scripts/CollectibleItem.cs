@@ -1,23 +1,35 @@
+using System;
 using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
     [SerializeField] GameObject FXToSpawn;
+    private bool _isClicked;
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        // S'assurer que le player a bien le tag "Player"
-        if (other.CompareTag("Player"))
+        _isClicked = false;
+    }
+    
+    public void IsCollected()
+    {
+        _isClicked = true;
+    }
+
+    protected virtual void Collect(GameObject player)
+    {
+        
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        if (_isClicked && other.CompareTag("Player"))
         {
+            Collect(other.gameObject);
+            
             if (FXToSpawn != null)
                 Instantiate(FXToSpawn, gameObject.transform.position, Quaternion.identity);
-
-            // Apply a visual effect on a player 
-                // => Level up effect / activate shield 
-            // Héritage à utiliser si besoin
-
-            // Play a sound (?)
-
+            
             Destroy(gameObject);
         }
     }

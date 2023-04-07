@@ -70,7 +70,11 @@ namespace StarterAssets
 				}
 				else if (layerId == LayerMask.NameToLayer("Collectibles"))
 				{
-					//Collect item
+					if (hitObject.TryGetComponent(out CollectibleItem item))
+					{
+						item.IsCollected();
+						_navMeshAgent.SetDestination(hitInfo.point);
+					}
 				}
 				else if (layerId == LayerMask.NameToLayer("Enemies"))
 				{

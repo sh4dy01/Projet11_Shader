@@ -2443,7 +2443,7 @@ MonoBehaviour:
   _rayMaxDistance: 20
   _clickableLayerMask:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 392
   cursorLocked: 0
   cursorInputForLook: 0
 --- !u!114 &8379618421150249820
@@ -2463,6 +2463,8 @@ MonoBehaviour:
   _shield: {fileID: 0}
   _projectileToSpawn: {fileID: 0}
   _projectileSpawnLocation: {fileID: 0}
+  _attackRange: 1
+  _attackCooldown: 1
 --- !u!195 &5406390013940768369
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class PlayerAttacks : DamageableEntity
     private bool _isAttacking;
     private bool _isInCooldown;
     private DamageableEnemy _target;
+    private CollectibleItem _item;
     private NavMeshAgent _navMeshAgent;
     
     private void Awake()

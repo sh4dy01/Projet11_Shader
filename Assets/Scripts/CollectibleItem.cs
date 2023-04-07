@@ -16,12 +16,21 @@ public class CollectibleItem : MonoBehaviour
         _isClicked = true;
     }
 
+    protected virtual void Collect(GameObject player)
+    {
+        
+    }
+
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && _isClicked)
+        if (_isClicked && other.CompareTag("Player"))
         {
+            Collect(other.gameObject);
+            
             if (FXToSpawn != null)
                 Instantiate(FXToSpawn, gameObject.transform.position, Quaternion.identity);
+            
+            Destroy(gameObject);
         }
     }
 

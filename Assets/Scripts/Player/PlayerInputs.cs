@@ -73,6 +73,7 @@ namespace StarterAssets
 					if (hitObject.TryGetComponent(out CollectibleItem item))
 					{
 						item.IsCollected();
+
 						_navMeshAgent.SetDestination(hitInfo.point);
 					}
 				}

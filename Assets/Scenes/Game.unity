@@ -126,6 +126,44 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &105040203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2511796271656456883, guid: f3329eef66a572442ac00a62f24ee7ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 194296989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &105040208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105040203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.08, y: 0.08, z: 0.008}
+  m_Center: {x: 0, y: 0.02, z: 0.0038}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
+--- !u!114 &105040209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105040203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.2, y: 0.2, z: 0.02}
+  m_Center: {x: 0, y: 0, z: -0.011}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &194296989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,11 +172,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1178443681}
     m_Modifications:
-    - target: {fileID: 854849163518169956, guid: f3329eef66a572442ac00a62f24ee7ab,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3857015051642592370, guid: f3329eef66a572442ac00a62f24ee7ab,
         type: 3}
       propertyPath: m_RootOrder
@@ -194,24 +227,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5404854720498391784, guid: f3329eef66a572442ac00a62f24ee7ab,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9112719723275951883, guid: f3329eef66a572442ac00a62f24ee7ab,
         type: 3}
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 477852295301325285, guid: f3329eef66a572442ac00a62f24ee7ab, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1424736050703690416, guid: f3329eef66a572442ac00a62f24ee7ab,
+    - targetCorrespondingSourceObject: {fileID: 2511796271656456883, guid: f3329eef66a572442ac00a62f24ee7ab,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1675750661}
+      addedObject: {fileID: 105040208}
+    - targetCorrespondingSourceObject: {fileID: 2511796271656456883, guid: f3329eef66a572442ac00a62f24ee7ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105040209}
   m_SourcePrefab: {fileID: 100100000, guid: f3329eef66a572442ac00a62f24ee7ab, type: 3}
 --- !u!1 &210055010
 GameObject:
@@ -1043,31 +1076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1675750659 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1424736050703690416, guid: f3329eef66a572442ac00a62f24ee7ab,
-    type: 3}
-  m_PrefabInstance: {fileID: 194296989}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1675750661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675750659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0

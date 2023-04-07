@@ -11,6 +11,8 @@ public class PlayerAttacks : DamageableEntity
     [Header("Attack Settings")]
     [SerializeField] float _attackRange = 1f;
     [SerializeField] float _attackCooldown = 1f;
+    [SerializeField] float _attackRangeOffset = 0.1f;
+    private float _attackRangeWithStoppingDistance;
     
     private bool _isAttacking;
     private bool _isInCooldown;
@@ -21,13 +23,14 @@ public class PlayerAttacks : DamageableEntity
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _attackRangeWithStoppingDistance = _attackRange + _navMeshAgent.stoppingDistance;
     }
     
     private void Update()
     {
         if (!_isAttacking || !_target) return;
 
-        if (IsInRange() && !_isInCooldown)
+        if (!_isInCooldown && IsInRange())
         {
             AttackTarget();
         }
@@ -35,14 +38,20 @@ public class PlayerAttacks : DamageableEntity
     
     private bool IsInRange()
     {
-        return Vector3.Distance(transform.position, _target.transform.position) <= _attackRange;
+        return Vector3.Distance(transform.position, _target.transform.position) <= _attackRangeWithStoppingDistance + _attackRangeOffset;
     }
 
     public void SetAttackTarget(DamageableEnemy enemy)
     {
         _isAttacking = true;
         _target = enemy;
-        _navMeshAgent.SetDestination(_target.transform.position - _attackRange * Vector3.forward);
+        transform.LookAt(_target.transform);
+
+        if (!IsInRange())
+        {
+            _navMeshAgent.SetDestination(_target.transform.position - _attackRange * transform.forward);
+        } 
+        else _navMeshAgent.ResetPath();
     }
 
     private void AttackTarget()

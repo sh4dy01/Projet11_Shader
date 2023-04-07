@@ -1475,12 +1475,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!4 &1813790655 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7201966501699174314, guid: b9374110bc413d8489776e8936a205b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 8967202348480636386}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1979352518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1684,7 +1678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6dacc7f4d725e45b11b919bfa1962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageDelay: 1
 --- !u!1 &2070925443028286612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,22 +2402,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
-        type: 3}
-      propertyPath: _attackRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
-        type: 3}
-      propertyPath: _projectileToSpawn
-      value: 
-      objectReference: {fileID: 1800454785169259140, guid: cff4c024d20095a458a66e6e0d47bf1b,
-        type: 3}
-    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
-        type: 3}
-      propertyPath: _projectileSpawnLocation
-      value: 
-      objectReference: {fileID: 1813790655}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class DamageableEnemy : DamageableEntity
 {
     protected override void GetHitEffect()
@@ -11,7 +9,4 @@ public class DamageableEnemy : DamageableEntity
     {
         // Destroy(gameObject);
     }
-    
-    
-
 }

@@ -1,23 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayer : MonoBehaviour, ICheckRange
 {
     public Transform player;
-
+    [SerializeField] private float _speed = 3.5f;
+    [SerializeField] private float _playerRange = 5f;
+    
     private NavMeshAgent _agent;
     
-    // Start is called before the first frame update
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _agent.speed = _speed;
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        _agent.SetDestination(player.position);
+        if (IsInRange())
+        {
+            _agent.SetDestination(player.position);
+        }
+    }
+    
+    public bool IsInRange()
+    {
+        return Vector3.Distance(transform.position, player.transform.position) <= _playerRange;
     }
 }

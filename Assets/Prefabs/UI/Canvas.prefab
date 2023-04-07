@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7420084387305913259}
   - component: {fileID: 5138063548978243625}
   - component: {fileID: 5862412422741597778}
+  - component: {fileID: 6134650956679314420}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -35,7 +36,7 @@ RectTransform:
   - {fileID: 882957099167871469}
   - {fileID: 1559597219938921578}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -104,6 +105,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6134650956679314420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67945386372958904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7caec3a457eebb44a1cb69ec8263226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAttacks: {fileID: 0}
+  _playerHungerThirst: {fileID: 0}
+  _hungerBar: {fileID: 8076943498557247401}
+  _thirstBar: {fileID: 3506000691154835398}
+  _healthBar: {fileID: 5137655201583838089}
 --- !u!1 &448078015224810215
 GameObject:
   m_ObjectHideFlags: 0

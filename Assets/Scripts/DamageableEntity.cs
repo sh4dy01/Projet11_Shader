@@ -14,7 +14,7 @@ public class DamageableEntity : MonoBehaviour
 
     public event Action OnHit;
 
-    private void Awake()
+    private void Start()
     {
         _currentHealth = _maxHealth;
     }

@@ -4,9 +4,4 @@ public class DamageableEnemy : DamageableEntity
     {
         // Visual effect
     }
-    
-    protected override void Die()
-    {
-        // Destroy(gameObject);
-    }
 }

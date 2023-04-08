@@ -17,7 +17,6 @@ namespace StarterAssets
 		
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
 		
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;

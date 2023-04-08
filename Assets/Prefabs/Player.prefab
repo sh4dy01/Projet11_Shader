@@ -2440,7 +2440,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
-  _rayMaxDistance: 20
+  _rayMaxDistance: 50
   _clickableLayerMask:
     serializedVersion: 2
     m_Bits: 392

@@ -4,7 +4,8 @@ using UnityEngine.AI;
 
 public class PlayerAttacks : DamageableEntity, ICheckRange
 {
-    [SerializeField] GameObject _shield;
+    private Animator _animator;
+    //[SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
     
@@ -20,10 +21,13 @@ public class PlayerAttacks : DamageableEntity, ICheckRange
     private CollectibleItem _item;
     private NavMeshAgent _navMeshAgent;
     
+    private static readonly int Attack = Animator.StringToHash("Attack");
+
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _attackRangeWithStoppingDistance = _attackRange + _navMeshAgent.stoppingDistance;
+        _animator = GetComponent<Animator>();
     }
     
     private void Update()
@@ -56,6 +60,8 @@ public class PlayerAttacks : DamageableEntity, ICheckRange
 
     private void AttackTarget()
     {
+        _animator.SetTrigger(Attack);
+        
         GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position, Quaternion.identity);
         proj.transform.LookAt(_target.transform);
         proj.GetComponent<Projectile>().SetTarget(_target.gameObject, gameObject.layer, _damage);

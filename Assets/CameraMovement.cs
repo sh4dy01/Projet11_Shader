@@ -9,8 +9,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] [Range(2, 6)] private float _minFOV = 4;
     [SerializeField] [Range(6, 14)] private float _maxFOV = 10;
     
-    private float _pitch;
     private CinemachineVirtualCamera _virtualCamera;
+    private LensSettings _lensSettings;
+    private float _rotationY;
 
     private void Awake()
     {
@@ -19,21 +20,31 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
-        _pitch = transform.eulerAngles.y;
+        _rotationY = transform.eulerAngles.y;
     }
 
     private void Update()
     {
         RotateCamera();
-        _virtualCamera.m_Lens.OrthographicSize = Mathf.Clamp(_virtualCamera.m_Lens.OrthographicSize - Input.mouseScrollDelta.y * _zoomSpeed, _minFOV, _maxFOV);
+        ZoomCamera();
+    }
+
+    private void ZoomCamera()
+    {
+        if (Input.mouseScrollDelta.y == 0) return;
+            
+            _virtualCamera.m_Lens.OrthographicSize =
+                Mathf.Clamp(_virtualCamera.m_Lens.OrthographicSize - Input.mouseScrollDelta.y * _zoomSpeed, _minFOV, _maxFOV);
     }
 
     private void RotateCamera()
     {
         if (!Input.GetMouseButton(2)) return;
 
-        _pitch -= _rotationSpeed * Input.GetAxis("Mouse X");
+        _rotationY -= _rotationSpeed * Input.GetAxis("Mouse X");
 
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, _pitch, transform.eulerAngles.z);
+        var eulerAngles = transform.eulerAngles;
+        eulerAngles = new Vector3(eulerAngles.x, _rotationY, eulerAngles.z);
+        transform.eulerAngles = eulerAngles;
     }
 }

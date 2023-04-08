@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerAttacks : DamageableEntity
+public class PlayerAttacks : DamageableEntity, ICheckRange
 {
     [SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
@@ -36,7 +36,7 @@ public class PlayerAttacks : DamageableEntity
         }
     }
     
-    private bool IsInRange()
+    public bool IsInRange()
     {
         return Vector3.Distance(transform.position, _target.transform.position) <= _attackRangeWithStoppingDistance + _attackRangeOffset;
     }

@@ -221,7 +221,7 @@ ModelImporter:
   - ce38ec0c8ed62ef4299b5085ba75b4d4
   - 2bbaa50753434cc4082d85b54f498f2c
   - baa0b0582f09d8d4a9b007adeec35555
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human:

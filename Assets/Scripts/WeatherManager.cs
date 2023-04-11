@@ -6,24 +6,37 @@ public class WeatherManager : MonoBehaviour
 {
     [SerializeField] private Material[] _materials;
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField][Range(0,1)] private float _reflectionIntensity;
     
-    [Header("Time values")]
+    [Header("Rain")]
     [SerializeField] private float _minRainDuration;
     [SerializeField] private float _maxRainDuration;
     [SerializeField] private float _minRainInterval;
     [SerializeField] private float _maxRainInterval;
     
+    [Header("Fades")]
+    [SerializeField] private float _fadeInReflexionDuration;
+    [SerializeField] private float _fadeOutReflexionDuration;
+    [SerializeField] private float _fadeInCloudsDuration;   
+    [SerializeField] private float _fadeOutCloudsDuration;
+
+    
     [SerializeField] private Light _directionalLight;
     [SerializeField] private float _secondsPerDay = 60.0F;
     [SerializeField] private float _timer = 0.0F;
 
-    private float _timeBeforeRain;
+    private float _rainTimer;
+    private float _fadeReflexionCount;
+    private float _fadeCloudsCount;
     private bool _isRaining;
-    private float _rainDuration;
 
     private void Awake()
     {
         _directionalLight.useColorTemperature = true;
+        _rainTimer = 10;
+        _fadeReflexionCount = 0;
+        _fadeCloudsCount = 0;
+        _isRaining = false;
     }
 
     private void Update()
@@ -41,22 +54,51 @@ public class WeatherManager : MonoBehaviour
     {
         if (_isRaining)
         {
-            if(_rainDuration <= 0)
+            if (_fadeReflexionCount >= 0) foreach (var material in _materials) material.SetFloat("_Smoothness", _fadeReflexionCount/_fadeInReflexionDuration);
+
+            if (_fadeCloudsCount >= 0)
+            {
+                float value = Mathf.Clamp(_fadeCloudsCount / _fadeInCloudsDuration,0.5f,1f);
+                _directionalLight.color = new Color(value,value,value,1);
+            }
+
+            if (_rainTimer <= 0)
             {
                 _particleSystem.Stop();
-                _timeBeforeRain = Random.Range(_minRainInterval,_maxRainInterval);
+                
+                _rainTimer = Random.Range(_minRainInterval, _maxRainInterval);
+                
+                _isRaining = false;
+                _fadeReflexionCount = _fadeOutReflexionDuration;
+                _fadeCloudsCount = _fadeOutCloudsDuration;
             }
-            _rainDuration -= Time.deltaTime;
+
         }
         else
         {
-            if(_timeBeforeRain <= 0)
+            if (_fadeReflexionCount >= 0) foreach (var material in _materials) material.SetFloat("_Smoothness", 1-_fadeReflexionCount/_fadeOutReflexionDuration);
+
+            if (_fadeCloudsCount >= 0)
+            {
+                float value = Mathf.Clamp(1-_fadeCloudsCount / _fadeOutCloudsDuration,0.5f,1f);
+                _directionalLight.color = new Color(value,value,value,1);
+            }
+            
+            if (_rainTimer <= 0)
             {
                 _particleSystem.Play();
-                _rainDuration = Random.Range(_minRainDuration,_maxRainDuration);
-                foreach (var material in _materials) material.SetFloat("Smoothness", 5f);
+                
+                _rainTimer = Random.Range(_minRainDuration,_maxRainDuration);
+                
+                _isRaining = true;
+                _fadeReflexionCount = _fadeInReflexionDuration;
+                _fadeCloudsCount = _fadeInCloudsDuration;
             }
-            _timeBeforeRain -= Time.deltaTime;
+            
         }
+        _rainTimer -= Time.deltaTime;
+        _fadeReflexionCount -= Time.deltaTime;
+        _fadeCloudsCount -= Time.deltaTime;
+
     }
 }

@@ -1596,6 +1596,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
+        type: 3}
+      propertyPath: _attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
+        type: 3}
+      propertyPath: _meleeAttackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379618421150249820, guid: b9374110bc413d8489776e8936a205b9,
+        type: 3}
+      propertyPath: _distanceAttackRange
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

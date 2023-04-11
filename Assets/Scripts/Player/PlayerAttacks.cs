@@ -2,9 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerAttacks : DamageableEntity
+public class PlayerAttacks : DamageableEntity, ICheckRange
 {
-    [SerializeField] GameObject _shield;
+    private Animator _animator;
+    //[SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
     
@@ -20,10 +21,13 @@ public class PlayerAttacks : DamageableEntity
     private CollectibleItem _item;
     private NavMeshAgent _navMeshAgent;
     
+    private static readonly int Attack = Animator.StringToHash("Attack");
+
     private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _attackRangeWithStoppingDistance = _attackRange + _navMeshAgent.stoppingDistance;
+        _animator = GetComponent<Animator>();
     }
     
     private void Update()
@@ -36,7 +40,7 @@ public class PlayerAttacks : DamageableEntity
         }
     }
     
-    private bool IsInRange()
+    public bool IsInRange()
     {
         return Vector3.Distance(transform.position, _target.transform.position) <= _attackRangeWithStoppingDistance + _attackRangeOffset;
     }
@@ -56,6 +60,8 @@ public class PlayerAttacks : DamageableEntity
 
     private void AttackTarget()
     {
+        _animator.SetTrigger(Attack);
+        
         GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position, Quaternion.identity);
         proj.transform.LookAt(_target.transform);
         proj.GetComponent<Projectile>().SetTarget(_target.gameObject, gameObject.layer, _damage);

@@ -9,5 +9,4 @@ public class CollectConsumables : CollectibleItem
     {
         player.GetComponent<PlayerHungerThirst>().EatAndDrink(_foodAmount, _waterAmount);
     }
-
 }

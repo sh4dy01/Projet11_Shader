@@ -6,14 +6,11 @@ namespace StarterAssets
 	public class PlayerInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
-		public Vector2 look;
-		public bool jump;
 		public bool sprint;
 
 		[Header("Interaction Settings")]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
-		[SerializeField] Material _outlineMaterial;
 		
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -63,33 +60,62 @@ namespace StarterAssets
 				GameObject hitObject = hitInfo.collider.gameObject;
 				int layerId = hitObject.layer;
 				
+				// MoveTo
 				if (layerId == LayerMask.NameToLayer("Ground"))
 				{
-					_navMeshAgent.SetDestination(hitInfo.point);
+					MoveTo(hitInfo);
 				}
+				// Collect
 				else if (layerId == LayerMask.NameToLayer("Collectibles"))
 				{
 					if (hitObject.TryGetComponent(out CollectibleItem item))
 					{
-						item.IsCollected();
-
-						_navMeshAgent.SetDestination(hitInfo.point);
+						CollectItem(item, hitInfo);
 					}
 				}
+				// Melee attack
 				else if (layerId == LayerMask.NameToLayer("Enemies"))
 				{
-					Debug.Log("Enemy");
 					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
 					{
-						playerEntity.SetAttackTarget(enemy);
+						playerEntity.MeleeAttack(enemy);
 					}
 				}
 			}
 		}
-
+		
 		private void RightClickInput()
 		{
+			Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
 			
+			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _clickableLayerMask))
+			{
+				playerEntity.ResetAttack();
+				
+				GameObject hitObject = hitInfo.collider.gameObject;
+				int layerId = hitObject.layer;
+				
+				// Distance attack
+				if (layerId == LayerMask.NameToLayer("Enemies"))
+				{
+					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
+					{
+						playerEntity.RangeAttack(enemy);
+					}
+				}
+			}
+		}
+		
+		private void MoveTo(RaycastHit hitInfo)
+		{
+			_navMeshAgent.SetDestination(hitInfo.point);
+		}
+
+		private void CollectItem(CollectibleItem item, RaycastHit hitInfo)
+		{
+			item.IsCollected();
+
+			_navMeshAgent.SetDestination(hitInfo.point);
 		}
 
 		public void SprintInput(bool value)

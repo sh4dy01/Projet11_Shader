@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OutlineObject : MonoBehaviour
 {
     protected Material CurrentOutlineMaterial;
-
+    
+    private List<Material> _materials;
     private MeshRenderer _meshRenderer;
     
     protected virtual void Awake()
@@ -13,6 +16,12 @@ public class OutlineObject : MonoBehaviour
         {
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
+
+        if (_meshRenderer)
+        {
+            _materials = _meshRenderer.materials.ToList();
+        }
+
         
         CurrentOutlineMaterial = GameManager.Instance.OutlineMaterial;
     }
@@ -31,26 +40,13 @@ public class OutlineObject : MonoBehaviour
     
     private void AddOutlineMaterial()
     {
-        Material[] mats = new Material[_meshRenderer.materials.Length + 1];
-
-        for (int i = 0; i < _meshRenderer.materials.Length; i++)
-        {
-            mats[i] = _meshRenderer.materials[i];
-        }
-        
-        mats[^1] = CurrentOutlineMaterial;
-
-        _meshRenderer.materials = mats;
+        _materials.Add(CurrentOutlineMaterial);
+        _meshRenderer.SetMaterials(_materials);
     }
+    
     private void RemoveOutlineMaterial()
     {
-        Material[] mats = new Material[_meshRenderer.materials.Length - 1];
-
-        for (int i = 0; i < mats.Length; i++)
-        {
-            mats[i] = _meshRenderer.materials[i];
-        }
-
-        _meshRenderer.materials = mats;
+        _materials.RemoveAt(_materials.Count - 1);
+        _meshRenderer.SetMaterials(_materials);
     }
 }

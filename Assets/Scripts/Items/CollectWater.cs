@@ -4,8 +4,8 @@ using UnityEngine;
 public class CollectWater : CollectibleItem
 {
     [SerializeField] private PlayerHungerThirst playerStats;
-    
-    private void OnTriggerEnter(Collider other)
+
+    public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
         

@@ -47,6 +47,6 @@ public class OutlineObject : MonoBehaviour
     private void RemoveOutlineMaterial()
     {
         _materials.RemoveAt(_materials.Count - 1);
-        _meshRenderer.SetMaterials(_materials);
+        _meshRenderer.materials = _materials.ToArray();
     }
 }

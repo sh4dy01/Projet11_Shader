@@ -8,6 +8,7 @@ public class PlayerEntity : DamageableEntity
     //[SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
+    [SerializeField] private GameObject _axeGameObject;
     
     [Header("Attack Settings")]
     [SerializeField] float _distanceAttackRange = 1f;
@@ -49,7 +50,7 @@ public class PlayerEntity : DamageableEntity
     
     public bool IsInRange()
     {
-        return Vector3.Distance(transform.position, _target.transform.position) <= _currentAttackRange + _stoppingDistance + _attackRangeOffset;
+        return Vector3.Distance(transform.position, _target.transform.position) <= _currentAttackRange + _attackRangeOffset;
     }
     
     public void MeleeAttack(DamageableEnemy enemy)
@@ -57,6 +58,7 @@ public class PlayerEntity : DamageableEntity
         _currentAttackRange = _meleeAttackRange + _stoppingDistance;
         _attackTriggerAnimation = MeleeAttackTrigger;
         _isRangeAttack = false;
+        _axeGameObject.SetActive(true);
         SetAttackTarget(enemy);
     }
 
@@ -65,6 +67,7 @@ public class PlayerEntity : DamageableEntity
         _currentAttackRange = _distanceAttackRange + _stoppingDistance;
         _attackTriggerAnimation = RangeAttackTrigger;
         _isRangeAttack = true;
+        _axeGameObject.SetActive(false);
         SetAttackTarget(enemy);
     }
 
@@ -76,7 +79,7 @@ public class PlayerEntity : DamageableEntity
 
         if (!IsInRange())
         {
-            _navMeshAgent.SetDestination(_target.transform.position - _meleeAttackRange * transform.forward);
+            _navMeshAgent.SetDestination(_target.transform.position - _currentAttackRange * transform.forward);
         } 
         else _navMeshAgent.ResetPath();
     }

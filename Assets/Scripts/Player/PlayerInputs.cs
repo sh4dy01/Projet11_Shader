@@ -13,6 +13,7 @@ namespace StarterAssets
 		[Header("Interaction Settings")]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
+		[SerializeField] Material _outlineMaterial;
 		
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;

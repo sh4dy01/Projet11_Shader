@@ -193,7 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cf40023b6ae16409d0bddf3e38ac7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _materials: []
+  _materials:
+  - {fileID: 2100000, guid: 3ddf603eb93e6c442a08a41073cdb72e, type: 2}
+  - {fileID: 2100000, guid: d9a14764a72c90e4ca1eb579c5f9cfa1, type: 2}
+  - {fileID: 2100000, guid: a195a20089d912149b30a4d0ec42fd7e, type: 2}
   _particleSystem: {fileID: 1768372031}
   _reflectionIntensity: 0.5
   _minRainDuration: 20

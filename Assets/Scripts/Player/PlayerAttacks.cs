@@ -23,8 +23,10 @@ public class PlayerAttacks : DamageableEntity, ICheckRange
     
     private static readonly int Attack = Animator.StringToHash("Attack");
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _attackRangeWithStoppingDistance = _attackRange + _navMeshAgent.stoppingDistance;
         _animator = GetComponent<Animator>();

@@ -83,7 +83,7 @@ Shader "Learning/Unlit/Water"
 
 				float pxDist = (zRaw - i.vertex.w + 1.0F);
 				float alpha = saturate(1.0F - 1.0F / (pxDist * pxDist));
-				finalColor.rgb *= tex2D(_CameraColorTexture, screenUVs).rgb;
+				//finalColor.rgb *= tex2D(_CameraColorTexture, screenUVs).rgb;
 				finalColor.w = alpha;
 
 				return finalColor;

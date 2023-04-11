@@ -11,9 +11,9 @@ namespace StarterAssets
 		public bool sprint;
 
 		[Header("Interaction Settings")]
-		[Range(1f, 50f)]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
+		[SerializeField] Material _outlineMaterial;
 		
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;

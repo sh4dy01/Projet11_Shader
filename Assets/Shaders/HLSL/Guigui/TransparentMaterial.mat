@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SphereExtrude
-  m_Shader: {fileID: 4800000, guid: c1c547f753df42949a9bdf9dbdb24475, type: 3}
+  m_Name: TransparentMaterial
+  m_Shader: {fileID: 4800000, guid: d31f895f03777664db38129651664009, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,14 +22,10 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - _Texture:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Intensity: 0.15
-    - _Speed: 3
-    m_Colors: []
+    - _BorderSize: 0.47
+    m_Colors:
+    - _Color: {r: 0.33999997, g: 0.85, b: 0.92, a: 1}
   m_BuildTextureStacks: []

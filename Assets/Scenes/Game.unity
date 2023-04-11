@@ -687,6 +687,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 8338988565591873055}
+    - target: {fileID: 8085041137050743980, guid: 39f5698d21b707c46ad4fd0250b4f718,
+        type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: -80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1284,7 +1289,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -8
+  near clip plane: -80
   far clip plane: 500
   field of view: 40
   orthographic: 1
@@ -1327,6 +1332,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4904177944334428461, guid: b9374110bc413d8489776e8936a205b9,
+        type: 3}
+      propertyPath: _rayMaxDistance
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 5979150132280484443, guid: b9374110bc413d8489776e8936a205b9,
         type: 3}
       propertyPath: m_RootOrder

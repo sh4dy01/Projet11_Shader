@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerAttacks : DamageableEntity, ICheckRange
+public class PlayerEntity : DamageableEntity, ICheckRange
 {
     private Animator _animator;
     //[SerializeField] GameObject _shield;

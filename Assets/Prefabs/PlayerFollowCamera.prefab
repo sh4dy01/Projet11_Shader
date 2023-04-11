@@ -120,7 +120,7 @@ Transform:
   m_Children:
   - {fileID: 9192580642026549924}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!114 &8085041137050743980
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 6
-    NearClipPlane: -8
+    NearClipPlane: -80
     FarClipPlane: 500
     Dutch: 0
     ModeOverride: 0

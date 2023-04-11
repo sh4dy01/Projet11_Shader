@@ -20,7 +20,7 @@ namespace StarterAssets
 		
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;
-		private PlayerAttacks _playerAttacks;
+		private PlayerEntity playerEntity;
 		
 		public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
@@ -28,7 +28,7 @@ namespace StarterAssets
 		{
 			_mainCamera = Camera.main;    
 			_navMeshAgent = GetComponent<NavMeshAgent>();
-			_playerAttacks = GetComponent<PlayerAttacks>();
+			playerEntity = GetComponent<PlayerEntity>();
 		}
 
 		private void Update()
@@ -58,7 +58,7 @@ namespace StarterAssets
 
 			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _clickableLayerMask))
 			{
-				_playerAttacks.ResetAttack();
+				playerEntity.ResetAttack();
 				
 				GameObject hitObject = hitInfo.collider.gameObject;
 				int layerId = hitObject.layer;
@@ -81,7 +81,7 @@ namespace StarterAssets
 					Debug.Log("Enemy");
 					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
 					{
-						_playerAttacks.SetAttackTarget(enemy);
+						playerEntity.SetAttackTarget(enemy);
 					}
 				}
 			}

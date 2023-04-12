@@ -1524,9 +1524,29 @@ PrefabInstance:
       objectReference: {fileID: 1768372031}
     - target: {fileID: 3323088227415366520, guid: 37a2ba62b5580f546ad320b6fac9f72f,
         type: 3}
+      propertyPath: _ripplesStength
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3323088227415366520, guid: 37a2ba62b5580f546ad320b6fac9f72f,
+        type: 3}
+      propertyPath: _minRainInterval
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3323088227415366520, guid: 37a2ba62b5580f546ad320b6fac9f72f,
+        type: 3}
       propertyPath: _directionalLight
       value: 
       objectReference: {fileID: 2114283754330233425}
+    - target: {fileID: 3323088227415366520, guid: 37a2ba62b5580f546ad320b6fac9f72f,
+        type: 3}
+      propertyPath: _fadeInCloudsDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3323088227415366520, guid: 37a2ba62b5580f546ad320b6fac9f72f,
+        type: 3}
+      propertyPath: _fadeOutCloudsDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6108175210412720289, guid: 37a2ba62b5580f546ad320b6fac9f72f,
         type: 3}
       propertyPath: m_Name

@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ripples_f00628ad2b54470287c6ee10347bf292_Ripplesheet_4286618499:
+        m_Texture: {fileID: 2800000, guid: 1344c5d30504b434a86b842e3b322b83, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_36a2f7a1a4174dd3bd66303c588219a1_Texture_1:
         m_Texture: {fileID: 2800000, guid: 33bb8af5ae7e7b041904a41646adee61, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -114,7 +118,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1
+    - _RippleStrength: 0.050053418
+    - _Smoothness: 0.9998829
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

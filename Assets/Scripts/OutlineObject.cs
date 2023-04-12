@@ -6,10 +6,18 @@ public class OutlineObject : MonoBehaviour
 {
     protected Material CurrentOutlineMaterial;
     
-    private List<Material> _materials;
+    protected List<Material> _materials;
     private MeshRenderer _meshRenderer;
     
     protected virtual void Awake()
+    {
+        _materials = new List<Material>();
+        GetMaterials();
+        
+        CurrentOutlineMaterial = GameManager.Instance.OutlineMaterial;
+    }
+
+    protected virtual void GetMaterials()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
         if (!_meshRenderer)
@@ -21,30 +29,27 @@ public class OutlineObject : MonoBehaviour
         {
             _materials = _meshRenderer.materials.ToList();
         }
-
-        
-        CurrentOutlineMaterial = GameManager.Instance.OutlineMaterial;
     }
-    
+
     private void OnMouseEnter()
     {
-        if (!_meshRenderer) return;
+        if (_materials.Count <= 0) return;
         AddOutlineMaterial();
     }
     
     private void OnMouseExit()
     {
-        if (!_meshRenderer) return;
+        if (_materials.Count <= 0) return;
         RemoveOutlineMaterial();
     }
     
-    private void AddOutlineMaterial()
+    protected virtual void AddOutlineMaterial()
     {
         _materials.Add(CurrentOutlineMaterial);
         _meshRenderer.SetMaterials(_materials);
     }
     
-    private void RemoveOutlineMaterial()
+    protected virtual void RemoveOutlineMaterial()
     {
         _materials.RemoveAt(_materials.Count - 1);
         _meshRenderer.materials = _materials.ToArray();

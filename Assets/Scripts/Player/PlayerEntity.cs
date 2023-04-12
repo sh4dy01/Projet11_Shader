@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerEntity : DamageableEntity
 {
@@ -148,13 +149,9 @@ public class PlayerEntity : DamageableEntity
         _target = null;
     }
 
-    protected override void GetHitEffect()
-    {
-        // player Visual effect
-    }
-    
     protected override void Die()
     {
-        // Respawn
+        //DieEffect();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

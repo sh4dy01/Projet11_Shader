@@ -5,9 +5,8 @@ using UnityEngine;
 public class OutlineObject : MonoBehaviour
 {
     protected Material CurrentOutlineMaterial;
-    
     protected List<Material> _materials;
-    private MeshRenderer _meshRenderer;
+    protected MeshRenderer _meshRenderer;
     
     protected virtual void Awake()
     {

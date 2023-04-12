@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class DamageableEntity : OutlineObject
 {
     [SerializeField] protected int _damage = 1;
     [SerializeField] private int _maxHealth = 5;
+    [Header("Visual effects")]
+    [SerializeField] private DissolveController _dissolveController;
+    [SerializeField] private HitEffectController _hitEffectController;
     
     private int _currentHealth;
     
@@ -21,12 +25,14 @@ public class DamageableEntity : OutlineObject
 
     public void TakeDamage(int damage)
     {
+        if (_currentHealth <= 0) return;
+        
         _currentHealth = Mathf.Clamp(_currentHealth -= damage, 0, _maxHealth);
         OnHit?.Invoke();
         
         Debug.Log(gameObject.name + " took " + damage + " damage. Current health: " + _currentHealth);
         
-        GetHitEffect();
+        HitEffect();
         
         if (_currentHealth <= 0)
         {
@@ -34,20 +40,29 @@ public class DamageableEntity : OutlineObject
         }
     }
 
-    protected virtual void GetHitEffect()
-    {
-        // Visual effect
-    }
-    
     protected virtual void Die()
     {
         DieEffect();
-        Destroy(gameObject);
+    }
+
+    protected virtual void HitEffect()
+    {
+        if (_hitEffectController)
+        {
+            _hitEffectController.StartEffect();
+        }
     }
     
     protected virtual void DieEffect()
     {
-        // Visual effect
-        // Sound effect
+        if (_dissolveController)
+        {
+            _dissolveController.Dissolve(RemoveObject);
+        }
+    }
+    
+    private void RemoveObject()
+    {
+        Destroy(gameObject);
     }
 }

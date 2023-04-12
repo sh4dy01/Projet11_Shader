@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 5590782544783555818}
   - component: {fileID: 8383120697646972032}
   - component: {fileID: 4326186890630377874}
+  - component: {fileID: 2557084511508101762}
+  - component: {fileID: 6639230152441556814}
   m_Layer: 3
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -184,8 +186,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _maxHealth: 5
+  _dissolveController: {fileID: 2557084511508101762}
+  _hitEffectController: {fileID: 6639230152441556814}
+--- !u!114 &2557084511508101762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308669023453842316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24edc3898069c1f45b48f58daee98b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshRenderer: {fileID: 8493726070368991694}
+  _dissolveRate: 0.0125
+  _refreshRate: 0.025
+--- !u!114 &6639230152441556814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308669023453842316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f92d50d08049e24b8580b1f389f3364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _matBase: {fileID: 2100000, guid: f7774ac7a3e70904e9ee45ccabb4a98b, type: 2}
   _matDamage: {fileID: 2100000, guid: 630aa3ed5ab45e5428039ab8718c3e9d, type: 2}
+  _hitEffectDuration: 0.3
+  _meshRenderer: {fileID: 8493726070368991694}
 --- !u!1 &6151814394192709434
 GameObject:
   m_ObjectHideFlags: 0

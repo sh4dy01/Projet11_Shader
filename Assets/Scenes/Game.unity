@@ -905,7 +905,7 @@ PrefabInstance:
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.145
+      value: -7.7
       objectReference: {fileID: 0}
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
@@ -915,7 +915,7 @@ PrefabInstance:
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.739
+      value: -2.39
       objectReference: {fileID: 0}
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
@@ -1217,7 +1217,7 @@ PrefabInstance:
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.3204565
+      value: -5.14
       objectReference: {fileID: 0}
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
@@ -1227,7 +1227,7 @@ PrefabInstance:
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.1915185
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 758566129642288979, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
@@ -1269,12 +1269,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cylinder
       objectReference: {fileID: 0}
+    - target: {fileID: 4326186890630377874, guid: b620365961a8192449bc2de5f2be4f80,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 3893294199639930361}
     - target: {fileID: 8383120697646972032, guid: b620365961a8192449bc2de5f2be4f80,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 3893294199639930361}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8383120697646972032, guid: b620365961a8192449bc2de5f2be4f80, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

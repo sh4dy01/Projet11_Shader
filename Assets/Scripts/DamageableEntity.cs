@@ -11,12 +11,15 @@ public class DamageableEntity : OutlineObject
     [SerializeField] private HitEffectController _hitEffectController;
     
     private int _currentHealth;
+    private bool _isDead;
     
     public int Health => _currentHealth;
     public int MaxHealth => _maxHealth;
     public int Damage => _damage;
+    protected bool IsDead => _isDead;
 
     public event Action OnHit;
+    public event Action OnDeath;
 
     private void Start()
     {
@@ -42,6 +45,8 @@ public class DamageableEntity : OutlineObject
 
     protected virtual void Die()
     {
+        OnDeath?.Invoke();
+        _isDead = true;
         DieEffect();
     }
 

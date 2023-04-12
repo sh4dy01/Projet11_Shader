@@ -3753,6 +3753,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _maxHealth: 5
+  _dissolveController: {fileID: 0}
+  _hitEffectController: {fileID: 0}
   _projectileToSpawn: {fileID: 1800454785169259140, guid: cff4c024d20095a458a66e6e0d47bf1b,
     type: 3}
   _projectileSpawnLocation: {fileID: 7201966501699174314}
@@ -3760,6 +3762,7 @@ MonoBehaviour:
   _distanceAttackRange: 10
   _meleeAttackRange: 2
   _attackCooldown: 1
+  _attackRangeCooldown: 1.7
   _attackRangeOffset: 0.1
 --- !u!195 &5406390013940768369
 NavMeshAgent:

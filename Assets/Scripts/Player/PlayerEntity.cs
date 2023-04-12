@@ -19,9 +19,11 @@ public class PlayerEntity : DamageableEntity
     [SerializeField] float _distanceAttackRange = 1f;
     [SerializeField] float _meleeAttackRange = 1f;
     [SerializeField] float _attackCooldown = 1f;
+    [SerializeField] float _attackRangeCooldown = 3f;
     [SerializeField] float _attackRangeOffset = 0.1f;
 
     private float _currentAttackRange;
+    private float _currentAttackCooldown;
     private float _stoppingDistance;
     private int _attackTriggerAnimation;
     private bool _isAttacking;
@@ -33,7 +35,8 @@ public class PlayerEntity : DamageableEntity
     
     private static readonly int MeleeAttackTrigger = Animator.StringToHash("MeleeAttack");
     private static readonly int RangeAttackTrigger = Animator.StringToHash("RangeAttack");
-    
+    private static readonly int Reset = Animator.StringToHash("Reset");
+
     protected override void Awake()
     {
         _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -78,8 +81,8 @@ public class PlayerEntity : DamageableEntity
             AttackTarget();
         }
     }
-    
-    public bool IsInRange()
+
+    private bool IsInRange()
     {
         return Vector3.Distance(transform.position, _target.transform.position) <= _currentAttackRange + _attackRangeOffset;
     }
@@ -88,6 +91,7 @@ public class PlayerEntity : DamageableEntity
     {
         _currentAttackRange = _meleeAttackRange + _stoppingDistance;
         _attackTriggerAnimation = MeleeAttackTrigger;
+        _currentAttackCooldown = _attackCooldown;
         _isRangeAttack = false;
         _axeGameObject.SetActive(true);
         SetAttackTarget(enemy);
@@ -97,6 +101,7 @@ public class PlayerEntity : DamageableEntity
     {
         _currentAttackRange = _distanceAttackRange + _stoppingDistance;
         _attackTriggerAnimation = RangeAttackTrigger;
+        _currentAttackCooldown = _attackRangeCooldown;
         _isRangeAttack = true;
         _axeGameObject.SetActive(false);
         SetAttackTarget(enemy);
@@ -107,6 +112,8 @@ public class PlayerEntity : DamageableEntity
         _isAttacking = true;
         _target = enemy;
         transform.LookAt(_target.transform);
+        _target.OnDeath += ResetAttack;
+        _target.OnDeath += ResetAttackAnimation;
 
         if (!IsInRange())
         {
@@ -119,16 +126,16 @@ public class PlayerEntity : DamageableEntity
     {
         _animator.SetTrigger(_attackTriggerAnimation);
 
-        if (_isRangeAttack)
+        if (!_isRangeAttack)
         {
-            ThrowProjectile();
+            _target.TakeDamage(_damage);
         }
-        else _target.TakeDamage(_damage);
+        //Throw arrow with animation event
         
         StartCoroutine(StartCooldown());
     }
 
-    private void ThrowProjectile()
+    public void ThrowArrow()
     {
         GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position,
             Quaternion.identity);
@@ -139,7 +146,7 @@ public class PlayerEntity : DamageableEntity
     private IEnumerator StartCooldown()
     {
         _isInCooldown = true;
-        yield return new WaitForSeconds(_attackCooldown);
+        yield return new WaitForSeconds(_currentAttackCooldown);
         _isInCooldown = false;
     }
     
@@ -147,6 +154,11 @@ public class PlayerEntity : DamageableEntity
     {
         _isAttacking = false;
         _target = null;
+    }
+    
+    private void ResetAttackAnimation()
+    {
+        _animator.SetTrigger(Reset);
     }
 
     protected override void Die()

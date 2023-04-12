@@ -125,14 +125,15 @@ public class PlayerEntity : DamageableEntity
     private void AttackTarget()
     {
         _animator.SetTrigger(_attackTriggerAnimation);
+        StartCoroutine(StartCooldown());
+    }
 
-        if (!_isRangeAttack)
+    public void TriggerMeleeAttack()
+    {
+        if (_target)
         {
             _target.TakeDamage(_damage);
         }
-        //Throw arrow with animation event
-        
-        StartCoroutine(StartCooldown());
     }
 
     public void ThrowArrow()
@@ -140,7 +141,7 @@ public class PlayerEntity : DamageableEntity
         GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position,
             Quaternion.identity);
         proj.transform.LookAt(_target.transform);
-        proj.GetComponent<Projectile>().SetTarget(_target.gameObject, gameObject.layer, _damage);
+        proj.GetComponent<Projectile>().SetTarget(gameObject.layer, _damage);
     }
 
     private IEnumerator StartCooldown()

@@ -20,6 +20,7 @@ Shader "Learning/Unlit/Water"
 			#pragma fragment frag
 
 			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc"
 			
 			struct VS_INPUT
 			{
@@ -49,7 +50,7 @@ Shader "Learning/Unlit/Water"
 				o.vertex = mul(UNITY_MATRIX_VP, o.vertex);
 				o.clipPos = o.vertex;
 
-				o.normal = mul((float3x3) unity_ObjectToWorld, v.normal);
+				o.normal = mul(unity_ObjectToWorld, v.normal);
 
 				return o;
 			}
@@ -62,8 +63,6 @@ Shader "Learning/Unlit/Water"
 				float3 dir = normalize(_WorldSpaceCameraPos - i.pixelWorldPos.xyz);
 				float3 nor = normalize(i.normal);
 
-				float3 lightDir = float3(0, -1, 0);
-				float3 S = normalize(reflect(lightDir, nor));
 
 				// Map UVs directly from world space to keep consistent texture size with scaled water planes.
 				float2 texCoord = i.pixelWorldPos.xz * 0.2F;
@@ -72,10 +71,18 @@ Shader "Learning/Unlit/Water"
 				float displace = tex2D(_DispTexture, texCoord - float2(-_Time.y, -_Time.y) * 0.1F).r * 0.2F;
 				float3 texColor = tex2D(_AlbedoTexture, texCoord + displace - float2(_Time.y, -_Time.y) * 0.1F) * tex2D(_AlbedoTexture, texCoord.yx + _Time.y * 0.05F);
 
+
 				// Water texture, with transparency according to camera angle.
 				float4 finalColor = float4(texColor, 0.0F);//1.0F - dot(dir, nor));
 
-				finalColor += pow(max(0, dot(S, dir)), 80) * pow(finalColor.b + 0.5F, 10);
+				// Diffuse lighting.
+				float b = max(0.1F, dot(nor, _WorldSpaceLightPos0));
+				finalColor *= b * _LightColor0;
+
+				// Specular.
+				float3 V = reflect(-dir, nor);
+				finalColor += pow(max(0, dot(V, _WorldSpaceLightPos0.xyz)), 80) * pow(texColor.b + 0.5F, 10) * _LightColor0;
+
 
 				float2 screenUVs = (i.clipPos.xy / i.clipPos.w) * 0.5F + 0.5F;
 				screenUVs.y = 1.0F - screenUVs.y;
@@ -85,6 +92,7 @@ Shader "Learning/Unlit/Water"
 				float alpha = saturate(1.0F - 1.0F / (pxDist * pxDist));
 				//finalColor.rgb *= tex2D(_CameraColorTexture, screenUVs).rgb;
 				finalColor.w = alpha;
+
 
 				return finalColor;
 			}

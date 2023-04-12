@@ -19,5 +19,6 @@ public class LightData : MonoBehaviour
     {
         Shader.SetGlobalColor("_LightColor", _light.color);
         Shader.SetGlobalVector("_WorldSpaceLightDir", transform.forward);
+        Shader.SetGlobalFloat("_Intensity", _light.intensity);
     }
 }

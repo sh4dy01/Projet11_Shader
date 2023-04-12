@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1048064637934327269}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &4730117942148800647
 MeshCollider:
@@ -122,7 +122,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d47e95b0a681a8046b9ae47334846b53, type: 2}
+      objectReference: {fileID: 2100000, guid: 6aa8f2dbe01c6334badc6a4394962a24, type: 2}
     - target: {fileID: 919132149155446097, guid: 4614e13eaea23d34fb8178446e655e9e,
         type: 3}
       propertyPath: m_Name

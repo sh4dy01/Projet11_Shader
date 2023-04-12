@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class DissolveController : MonoBehaviour
@@ -9,14 +10,17 @@ public class DissolveController : MonoBehaviour
     [SerializeField] private float _dissolveRate = 0.0125f;
     [SerializeField] private float _refreshRate = 0.025f;
     
-    private Material[] _materials;
-    
+    private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
+
     // Start is called before the first frame update
     private void Start()
     {
-        if (_meshRenderer)
+        if (!_meshRenderer) return;
+        
+        for (int i = 0; i < _meshRenderer.materials.Length; i++)
         {
-            _materials = _meshRenderer.materials;
+            _meshRenderer.materials[i] = new Material(_meshRenderer.materials[i]);
+            _meshRenderer.materials[i].SetFloat(DissolveAmount, 0);
         }
     }
     
@@ -27,19 +31,21 @@ public class DissolveController : MonoBehaviour
 
     private IEnumerator DissolveCo(Action callback)
     {
-        if (_materials.Length > 0)
+        yield return new WaitForSeconds(0.5f);
+        
+        if (_meshRenderer.materials.Length > 0)
         {
             float counter = 0;
             
-            while (_materials[0].GetFloat("_DissolveAmount") < 1)
+            while (_meshRenderer.materials[0].GetFloat(DissolveAmount) < 1)
             {
                 counter += _dissolveRate;
 
-                foreach (var material in _materials)
+                foreach (var material in _meshRenderer.materials)
                 {
-                    material.SetFloat("_DissolveAmount", counter);
+                    material.SetFloat(DissolveAmount, counter);
                 }
-
+                
                 yield return new WaitForSeconds(_refreshRate);
             }
         }

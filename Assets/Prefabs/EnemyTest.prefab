@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _maxHealth: 5
+  _matBase: {fileID: 2100000, guid: f7774ac7a3e70904e9ee45ccabb4a98b, type: 2}
+  _matDamage: {fileID: 2100000, guid: 630aa3ed5ab45e5428039ab8718c3e9d, type: 2}
 --- !u!1 &6151814394192709434
 GameObject:
   m_ObjectHideFlags: 0

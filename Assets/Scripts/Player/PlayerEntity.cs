@@ -1,9 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerEntity : DamageableEntity
 {
+    private SkinnedMeshRenderer[] _meshRenderers;
+    
     private Animator _animator;
     //[SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
@@ -28,16 +32,42 @@ public class PlayerEntity : DamageableEntity
     
     private static readonly int MeleeAttackTrigger = Animator.StringToHash("MeleeAttack");
     private static readonly int RangeAttackTrigger = Animator.StringToHash("RangeAttack");
+    
     protected override void Awake()
     {
+        _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+
         base.Awake();
         
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _stoppingDistance = _navMeshAgent.stoppingDistance;
-        
         _animator = GetComponent<Animator>();
     }
+
+    protected override void GetMaterials()
+    {
+        foreach (var mesh in _meshRenderers)
+        {
+            _materials.AddRange(mesh.materials);
+        }
+    }
+
+    protected override void RemoveOutlineMaterial()
+    {
+        foreach (var mesh in _meshRenderers)
+        {
+            mesh.materials = mesh.materials.Take(mesh.materials.Length - 1).ToArray();
+        }
+    }
     
+    protected override void AddOutlineMaterial()
+    {
+        foreach (var mesh in _meshRenderers)
+        {
+            mesh.materials = mesh.materials.Append(GameManager.Instance.PlayerOutlineMaterial).ToArray();
+        }
+    }
+
     private void Update()
     {
         if (!_isAttacking || !_target) return;

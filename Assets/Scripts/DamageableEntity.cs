@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DamageableEntity : MonoBehaviour
+public class DamageableEntity : OutlineObject
 {
     [SerializeField] protected int _damage = 1;
     [SerializeField] private int _maxHealth = 5;

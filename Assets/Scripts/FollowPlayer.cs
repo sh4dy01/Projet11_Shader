@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FollowPlayer : MonoBehaviour, ICheckRange
+public class FollowPlayer : MonoBehaviour
 {
     public Transform player;
     [SerializeField] private float _speed = 3.5f;

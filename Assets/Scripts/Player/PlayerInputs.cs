@@ -6,12 +6,9 @@ namespace StarterAssets
 	public class PlayerInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
-		public Vector2 look;
-		public bool jump;
 		public bool sprint;
 
 		[Header("Interaction Settings")]
-		[Range(1f, 50f)]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
 		
@@ -20,7 +17,7 @@ namespace StarterAssets
 		
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;
-		private PlayerAttacks _playerAttacks;
+		private PlayerEntity playerEntity;
 		
 		public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
@@ -28,7 +25,7 @@ namespace StarterAssets
 		{
 			_mainCamera = Camera.main;    
 			_navMeshAgent = GetComponent<NavMeshAgent>();
-			_playerAttacks = GetComponent<PlayerAttacks>();
+			playerEntity = GetComponent<PlayerEntity>();
 		}
 
 		private void Update()
@@ -58,38 +55,67 @@ namespace StarterAssets
 
 			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _clickableLayerMask))
 			{
-				_playerAttacks.ResetAttack();
+				playerEntity.ResetAttack();
 				
 				GameObject hitObject = hitInfo.collider.gameObject;
 				int layerId = hitObject.layer;
 				
+				// MoveTo
 				if (layerId == LayerMask.NameToLayer("Ground"))
 				{
-					_navMeshAgent.SetDestination(hitInfo.point);
+					MoveTo(hitInfo);
 				}
+				// Collect
 				else if (layerId == LayerMask.NameToLayer("Collectibles"))
 				{
 					if (hitObject.TryGetComponent(out CollectibleItem item))
 					{
-						item.IsCollected();
-
-						_navMeshAgent.SetDestination(hitInfo.point);
+						CollectItem(item, hitInfo);
 					}
 				}
+				// Melee attack
 				else if (layerId == LayerMask.NameToLayer("Enemies"))
 				{
-					Debug.Log("Enemy");
 					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
 					{
-						_playerAttacks.SetAttackTarget(enemy);
+						playerEntity.MeleeAttack(enemy);
 					}
 				}
 			}
 		}
-
+		
 		private void RightClickInput()
 		{
+			Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
 			
+			if (Physics.Raycast(cameraRay, out var hitInfo, _rayMaxDistance, _clickableLayerMask))
+			{
+				playerEntity.ResetAttack();
+				
+				GameObject hitObject = hitInfo.collider.gameObject;
+				int layerId = hitObject.layer;
+				
+				// Distance attack
+				if (layerId == LayerMask.NameToLayer("Enemies"))
+				{
+					if (hitObject.TryGetComponent(out DamageableEnemy enemy))
+					{
+						playerEntity.RangeAttack(enemy);
+					}
+				}
+			}
+		}
+		
+		private void MoveTo(RaycastHit hitInfo)
+		{
+			_navMeshAgent.SetDestination(hitInfo.point);
+		}
+
+		private void CollectItem(CollectibleItem item, RaycastHit hitInfo)
+		{
+			item.IsCollected();
+
+			_navMeshAgent.SetDestination(hitInfo.point);
 		}
 
 		public void SprintInput(bool value)

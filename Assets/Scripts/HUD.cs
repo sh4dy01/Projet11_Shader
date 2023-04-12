@@ -1,9 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-	[SerializeField] private PlayerAttacks _playerAttacks;
+	[SerializeField] private PlayerEntity playerEntity;
 	[SerializeField] private PlayerHungerThirst _playerHungerThirst;
 
 	[SerializeField] private Image _hungerBar;
@@ -13,13 +14,13 @@ public class HUD : MonoBehaviour
 	private void Awake()
 	{
 		_playerHungerThirst.OnUpdate += UpdateValues;
-		_playerAttacks.OnHit += UpdateHealth;
+		playerEntity.OnHit += UpdateHealth;
 	}
 
 	private void OnDestroy()
 	{
 		_playerHungerThirst.OnUpdate -= UpdateValues;
-		_playerAttacks.OnHit -= UpdateHealth;
+		playerEntity.OnHit -= UpdateHealth;
 	}
 
 	private void UpdateValues()
@@ -30,6 +31,6 @@ public class HUD : MonoBehaviour
 
 	private void UpdateHealth()
 	{
-		_healthBar.fillAmount = (float)_playerAttacks.Health / (float)_playerAttacks.MaxHealth;
+		_healthBar.fillAmount = (float)playerEntity.Health / (float)playerEntity.MaxHealth;
 	}
 }

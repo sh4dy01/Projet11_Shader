@@ -43,7 +43,7 @@ Material:
     - _DissolveWidth: 0.02
     - _FresnelExponant: 0.5
     - _FresnelExponent: 2
-    - _FresnelVariation: 1
+    - _FresnelVariation: 1.55
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Variation: 1

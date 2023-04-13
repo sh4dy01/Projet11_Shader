@@ -108,6 +108,8 @@ namespace StarterAssets
 		
 		private void MoveTo(RaycastHit hitInfo)
 		{
+			playerEntity.ResetAttack();
+			playerEntity.ResetAttackAnimation();
 			_navMeshAgent.SetDestination(hitInfo.point);
 		}
 

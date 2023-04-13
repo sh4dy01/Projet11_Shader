@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6668377947407742362}
   - component: {fileID: 8588162176642900631}
   - component: {fileID: 3115797466929252150}
-  - component: {fileID: 6690390939250944771}
-  m_Layer: 0
+  - component: {fileID: 2196686942409645253}
+  m_Layer: 8
   m_Name: plastic_water_bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +101,8 @@ CapsuleCollider:
   m_Height: 0.23809336
   m_Direction: 1
   m_Center: {x: -0.0028354824, y: 0.10016131, z: 0}
---- !u!136 &6690390939250944771
-CapsuleCollider:
+--- !u!135 &2196686942409645253
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,11 +119,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.030621678
-  m_Height: 0.2607594
-  m_Direction: 1
-  m_Center: {x: -0.0028354824, y: 0.11149433, z: 0}
+  serializedVersion: 3
+  m_Radius: 0.32
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!1 &6590423747048853857
 GameObject:
   m_ObjectHideFlags: 0

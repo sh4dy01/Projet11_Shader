@@ -138,10 +138,14 @@ public class PlayerEntity : DamageableEntity
 
     public void ThrowArrow()
     {
-        GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position,
-            Quaternion.identity);
-        proj.transform.LookAt(_target.transform);
-        proj.GetComponent<Projectile>().SetTarget(gameObject.layer, _damage);
+       
+            GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position,
+                Quaternion.identity);
+            if (_target)
+                proj.transform.LookAt(_target.transform);
+
+            proj.GetComponent<Projectile>().SetTarget(gameObject.layer, _damage);
+        
     }
 
     private IEnumerator StartCooldown()

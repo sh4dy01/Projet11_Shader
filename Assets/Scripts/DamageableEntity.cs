@@ -26,6 +26,15 @@ public class DamageableEntity : OutlineObject
         _currentHealth = _maxHealth;
     }
 
+    public void Heal(int amount)
+    {
+        _currentHealth += amount;
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         if (_currentHealth <= 0) return;

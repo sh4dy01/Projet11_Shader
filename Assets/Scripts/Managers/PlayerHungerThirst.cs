@@ -18,8 +18,8 @@ public class PlayerHungerThirst : MonoBehaviour
     private PlayerMovement playerMovement;
 
     // Actual meters.
-    private float _hunger = 100.0F;
-	private float _thirst = 100.0F;
+    [SerializeField] private float _hunger = 100.0F;
+    [SerializeField] private float _thirst = 100.0F;
 
 	public float Hunger => _hunger;
 	public float Thirst => _thirst;
@@ -31,6 +31,7 @@ public class PlayerHungerThirst : MonoBehaviour
     {
         _instance = this;
         playerMovement = GetComponent<PlayerMovement>();
+        OnUpdate?.Invoke();
     }
 
     private void Update()

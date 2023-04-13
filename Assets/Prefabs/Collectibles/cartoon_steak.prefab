@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FXToSpawn: {fileID: 0}
-  _foodAmount: 25
+  _foodAmount: 40
   _waterAmount: 10
 --- !u!54 &6044504253370771350
 Rigidbody:

@@ -45,9 +45,9 @@ public class DamageableEntity : OutlineObject
 
     protected virtual void Die()
     {
+        DieEffect(RemoveObject);
         OnDeath?.Invoke();
         _isDead = true;
-        DieEffect();
     }
 
     protected virtual void HitEffect()
@@ -58,11 +58,11 @@ public class DamageableEntity : OutlineObject
         }
     }
     
-    protected virtual void DieEffect()
+    protected virtual void DieEffect(Action callback)
     {
         if (_dissolveController)
         {
-            _dissolveController.Dissolve(RemoveObject);
+            _dissolveController.Dissolve(callback);
         }
     }
     

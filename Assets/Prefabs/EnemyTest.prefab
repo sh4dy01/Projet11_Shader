@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _maxHealth: 5
+  _maxHealth: 4
   _dissolveController: {fileID: 2557084511508101762}
   _hitEffectController: {fileID: 6639230152441556814}
   _speed: 3.5

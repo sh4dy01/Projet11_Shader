@@ -25,7 +25,7 @@ public class CollectibleItem : OutlineObject
         
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         if (_isClicked && other.CompareTag("Player"))
         {

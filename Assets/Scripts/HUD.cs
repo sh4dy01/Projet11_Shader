@@ -33,7 +33,7 @@ public class HUD : MonoBehaviour
 
 	private void UpdateHealth()
 	{
-		_healthBar.fillAmount = (float)playerEntity.Health / (float)playerEntity.MaxHealth;
+		//_healthBar.fillAmount = (float)playerEntity.Health / (float)playerEntity.MaxHealth;
 		_HealthMaterial.SetFloat("_Health", (float)playerEntity.Health / (float)playerEntity.MaxHealth);
 	}
 }

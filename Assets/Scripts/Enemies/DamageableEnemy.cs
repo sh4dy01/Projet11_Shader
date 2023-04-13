@@ -4,10 +4,13 @@ using UnityEngine.AI;
 
 public class DamageableEnemy : DamageableEntity
 {
-    [SerializeField] private GameObject[] _itemToDrop;
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float _playerRange = 5f;
     
+    [Header("Drop Settings")]
+    [SerializeField] private GameObject[] _itemToDrop;
+    [SerializeField] [Range(0, 100)] private float _dropRate = 75;
+
     private NavMeshAgent _agent;
     private Transform _player;
 
@@ -34,7 +37,10 @@ public class DamageableEnemy : DamageableEntity
 
     private void DropItem()
     {
-        Instantiate(_itemToDrop[Random.Range(0, _itemToDrop.Length)], transform.position, Quaternion.identity);
+        if (Random.Range(0, 100) <= _dropRate)
+        {
+            Instantiate(_itemToDrop[Random.Range(0, _itemToDrop.Length)], transform.position, Quaternion.identity);
+        }
     }
 
     private bool IsInRange()

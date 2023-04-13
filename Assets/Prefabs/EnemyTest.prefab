@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _matBase: {fileID: 2100000, guid: f7774ac7a3e70904e9ee45ccabb4a98b, type: 2}
   _matDamage: {fileID: 2100000, guid: 630aa3ed5ab45e5428039ab8718c3e9d, type: 2}
-  _hitEffectDuration: 0.3
+  _hitEffectDuration: 0.125
   _meshRenderer: {fileID: 8493726070368991694}
 --- !u!1 &6151814394192709434
 GameObject:
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6dacc7f4d725e45b11b919bfa1962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageDelay: 1
+  _damageDelay: 2
 --- !u!65 &8578631323109472731
 BoxCollider:
   m_ObjectHideFlags: 0

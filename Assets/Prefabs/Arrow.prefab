@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32bc97e0b3a89844f8ca3b7f8276ebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 0}
+  _particleEffect: {fileID: 5807475759811904338, guid: ea49c95beae039549ae2e7da371accdb,
+    type: 3}
   _rigidbody: {fileID: 354654232690518547}
   _speed: 2.25
 --- !u!65 &6107017684750211072

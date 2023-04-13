@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _speed = 10f;
 

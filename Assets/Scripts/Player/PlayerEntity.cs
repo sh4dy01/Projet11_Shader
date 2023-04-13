@@ -1,21 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class PlayerEntity : DamageableEntity
 {
     private SkinnedMeshRenderer[] _meshRenderers;
     
     private Animator _animator;
-    //[SerializeField] GameObject _shield;
     [SerializeField] Projectile _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
     [SerializeField] private GameObject _axeGameObject;
-    
-    [Header("Attack Settings")]
+
+    [Header("Attack Settings")] 
+    [SerializeField] private int _rangeDamage = 2;
     [SerializeField] float _distanceAttackRange = 1f;
     [SerializeField] float _meleeAttackRange = 1f;
     [SerializeField] float _attackCooldown = 1f;
@@ -143,7 +141,7 @@ public class PlayerEntity : DamageableEntity
         if (_target)
             proj.transform.LookAt(_target.transform);
 
-        proj.GetComponent<Projectile>().SetTarget(gameObject.layer, _damage);
+        proj.GetComponent<Projectile>().SetTarget(gameObject.layer, _rangeDamage);
         
     }
 
@@ -160,9 +158,12 @@ public class PlayerEntity : DamageableEntity
         _target = null;
     }
     
-    private void ResetAttackAnimation()
+    public void ResetAttackAnimation()
     {
-        _animator.SetTrigger(Reset);
+        if (_isAttacking)
+        {
+            _animator.SetTrigger(Reset);
+        }
     }
 
     protected override void Die()

@@ -3751,7 +3751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410e0903c792d6b4d9a1c14863461784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 2
   _maxHealth: 5
   _dissolveController: {fileID: 0}
   _hitEffectController: {fileID: 0}
@@ -3759,6 +3759,7 @@ MonoBehaviour:
     type: 3}
   _projectileSpawnLocation: {fileID: 7201966501699174314}
   _axeGameObject: {fileID: 6487913465794026001}
+  _rangeDamage: 1
   _distanceAttackRange: 10
   _meleeAttackRange: 2
   _attackCooldown: 1

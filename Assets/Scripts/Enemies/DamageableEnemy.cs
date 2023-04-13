@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class DamageableEnemy : DamageableEntity
 {
+    [SerializeField] private GameObject _damageZone;
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float _playerRange = 5f;
 
@@ -25,15 +26,25 @@ public class DamageableEnemy : DamageableEntity
         CurrentOutlineMaterial = GameManager.Instance.EnemyOutlineMaterial;
         
         OnDeath += DropItem;
+        OnDeath += DisableDamageZone;
+        OnHealthUpdate += MoveToPlayer;
     }
 
     private void Update()
     {
-        if (!IsDead && IsInRange())
-        {
-            _agent.SetDestination(_player.position);
-            transform.LookAt(_player);
-        }
+        if (IsDead || !IsInRange()) return;
+
+        MoveToPlayer();
+    }
+    
+    private void MoveToPlayer()
+    {
+        if (IsDead) return;
+        _agent.SetDestination(_player.position);
+        //Rotate towards player
+        Vector3 direction = (_player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
     
     private void DropItem()
@@ -42,6 +53,11 @@ public class DamageableEnemy : DamageableEntity
         {
             Instantiate(_itemToDrop[Random.Range(0, _itemToDrop.Length)], transform.position, Quaternion.identity);
         }
+    }
+
+    private void DisableDamageZone()
+    {
+        _damageZone.SetActive(false);
     }
 
     private bool IsInRange()

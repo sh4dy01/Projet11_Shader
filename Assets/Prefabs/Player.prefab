@@ -3722,6 +3722,7 @@ MonoBehaviour:
   _thirstBaseDegrade: 0.3
   _walkMultiplier: 1.5
   _sprintMultiplier: 4
+  _loseHealthCooldown: 10
   _hunger: 60
   _thirst: 40
 --- !u!114 &4904177944334428461
@@ -3756,7 +3757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
-  _maxHealth: 6
+  _maxHealth: 7
   _dissolveController: {fileID: 0}
   _hitEffectController: {fileID: 0}
   _healCooldown: 5

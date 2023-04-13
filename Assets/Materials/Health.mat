@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Health: 1
+    - _Health: 0.85714287
     - _Speed: 7
     - _WaveLength: 20
     - _WaveScale: 0.03

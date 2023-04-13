@@ -5,12 +5,12 @@ using UnityEngine;
 public class DamageableEntity : OutlineObject
 {
     [SerializeField] protected int _damage = 1;
-    [SerializeField] private int _maxHealth = 5;
+    [SerializeField] protected int _maxHealth = 5;
     [Header("Visual effects")]
     [SerializeField] private DissolveController _dissolveController;
     [SerializeField] private HitEffectController _hitEffectController;
     
-    private int _currentHealth;
+    protected int _currentHealth;
     private bool _isDead;
     
     public int Health => _currentHealth;
@@ -18,7 +18,7 @@ public class DamageableEntity : OutlineObject
     public int Damage => _damage;
     protected bool IsDead => _isDead;
 
-    public event Action OnHit;
+    public event Action OnHealthUpdate;
     public event Action OnDeath;
 
     private void Start()
@@ -26,7 +26,7 @@ public class DamageableEntity : OutlineObject
         _currentHealth = _maxHealth;
     }
 
-    public void Heal(int amount)
+    protected void Heal(int amount)
     {
         _currentHealth += amount;
         if (_currentHealth > _maxHealth)
@@ -34,7 +34,7 @@ public class DamageableEntity : OutlineObject
             _currentHealth = _maxHealth;
         }
 
-        OnHit?.Invoke();
+        OnHealthUpdate?.Invoke();
     }
 
     public void TakeDamage(int damage)
@@ -42,7 +42,7 @@ public class DamageableEntity : OutlineObject
         if (_currentHealth <= 0) return;
         
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
-        OnHit?.Invoke();
+        OnHealthUpdate?.Invoke();
         
         Debug.Log(gameObject.name + " took " + damage + " damage. Current health: " + _currentHealth);
         

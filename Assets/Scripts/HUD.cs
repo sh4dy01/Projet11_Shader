@@ -16,14 +16,14 @@ public class HUD : MonoBehaviour
 	private void Awake()
 	{
 		_playerHungerThirst.OnUpdate += UpdateValues;
-		playerEntity.OnHit += UpdateHealth;
+		playerEntity.OnHealthUpdate += UpdateHealth;
 		_HealthMaterial.SetFloat("_Health", 1);
 	}
 
 	private void OnDestroy()
 	{
 		_playerHungerThirst.OnUpdate -= UpdateValues;
-		playerEntity.OnHit -= UpdateHealth;
+		playerEntity.OnHealthUpdate -= UpdateHealth;
 	}
 
 	private void UpdateValues()

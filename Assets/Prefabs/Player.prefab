@@ -3722,6 +3722,8 @@ MonoBehaviour:
   _thirstBaseDegrade: 0.3
   _walkMultiplier: 1.5
   _sprintMultiplier: 4
+  _hunger: 100
+  _thirst: 100
 --- !u!114 &4904177944334428461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3754,9 +3756,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
-  _maxHealth: 5
+  _maxHealth: 6
   _dissolveController: {fileID: 0}
   _hitEffectController: {fileID: 0}
+  _healCooldown: 5
+  _hungerThreshold: 65
   _projectileToSpawn: {fileID: 1800454785169259140, guid: cff4c024d20095a458a66e6e0d47bf1b,
     type: 3}
   _projectileSpawnLocation: {fileID: 7201966501699174314}

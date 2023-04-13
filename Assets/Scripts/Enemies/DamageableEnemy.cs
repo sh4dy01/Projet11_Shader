@@ -35,7 +35,7 @@ public class DamageableEnemy : DamageableEntity
             transform.LookAt(_player);
         }
     }
-
+    
     private void DropItem()
     {
         if (Random.Range(0, 100) <= _dropRate)

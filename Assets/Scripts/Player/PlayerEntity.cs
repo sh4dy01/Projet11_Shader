@@ -7,12 +7,18 @@ using UnityEngine.SceneManagement;
 public class PlayerEntity : DamageableEntity
 {
     private SkinnedMeshRenderer[] _meshRenderers;
-    
     private Animator _animator;
+    
+    [Header("Health Settings")]
+    [SerializeField] private float _healCooldown = 5f;
+    [SerializeField] private float _hungerThreshold = 50f;
+    [SerializeField] private float _hungerToLoseOnHealt = 5f;
+    
+    [Header("Projectile Settings")]
     [SerializeField] Projectile _projectileToSpawn;
     [SerializeField] Transform _projectileSpawnLocation;
     [SerializeField] private GameObject _axeGameObject;
-
+    
     [Header("Attack Settings")] 
     [SerializeField] private int _rangeDamage = 2;
     [SerializeField] float _distanceAttackRange = 1f;
@@ -74,12 +80,13 @@ public class PlayerEntity : DamageableEntity
 
     private void Update()
     {
-        if (PlayerHungerThirst.Instance.Hunger > 85.0F)
+        if (_currentHealth < _maxHealth && PlayerHungerThirst.Instance.Hunger > _hungerThreshold)
         {
             _currentHealCooldown -= Time.deltaTime;
             if (_currentHealCooldown <= 0.0F)
             {
-                _currentHealCooldown = 10.0F;
+                _currentHealCooldown = _healCooldown;
+                PlayerHungerThirst.Instance.DecreaseHungerOnHealth(_hungerToLoseOnHealt);
                 Heal(1);
             }
         }
@@ -137,7 +144,8 @@ public class PlayerEntity : DamageableEntity
         _animator.SetTrigger(_attackTriggerAnimation);
         StartCoroutine(StartCooldown());
     }
-
+    
+    // Called by animation event
     public void TriggerMeleeAttack()
     {
         if (_target)
@@ -145,7 +153,8 @@ public class PlayerEntity : DamageableEntity
             _target.TakeDamage(_damage);
         }
     }
-
+    
+    // Called by animation event
     public void ThrowArrow()
     {
         GameObject proj = Instantiate(_projectileToSpawn.gameObject, _projectileSpawnLocation.position,

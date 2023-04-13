@@ -65,4 +65,11 @@ public class PlayerHungerThirst : MonoBehaviour
         if (_hunger > 100.0F) _hunger = 100.0F;
         if (_thirst > 100.0F) _thirst = 100.0F;
     }
+    
+    public void DecreaseHungerOnHealth(float hungerAmount)
+    {
+        _hunger -= hungerAmount;
+        if (_hunger < 0.0F) _hunger = 0.0F;
+        OnUpdate?.Invoke();
+    }
 }

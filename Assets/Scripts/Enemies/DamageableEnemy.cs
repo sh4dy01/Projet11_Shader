@@ -32,6 +32,7 @@ public class DamageableEnemy : DamageableEntity
         if (!IsDead && IsInRange())
         {
             _agent.SetDestination(_player.position);
+            transform.LookAt(_player);
         }
     }
 

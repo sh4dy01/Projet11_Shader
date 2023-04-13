@@ -33,13 +33,15 @@ public class DamageableEntity : OutlineObject
         {
             _currentHealth = _maxHealth;
         }
+
+        OnHit?.Invoke();
     }
 
     public void TakeDamage(int damage)
     {
         if (_currentHealth <= 0) return;
         
-        _currentHealth = Mathf.Clamp(_currentHealth -= damage, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
         OnHit?.Invoke();
         
         Debug.Log(gameObject.name + " took " + damage + " damage. Current health: " + _currentHealth);

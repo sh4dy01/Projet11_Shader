@@ -13,6 +13,8 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private float _maxRainDuration;
     [SerializeField] private float _minRainInterval;
     [SerializeField] private float _maxRainInterval;
+    [SerializeField][Range(0,1)] private float _ripplesStength = 0.3f;
+    [SerializeField][Range(0,1)] private float _reflectionStength = 1;
     
     [Header("Fades")]
     [SerializeField] private float _fadeInReflexionDuration;
@@ -54,7 +56,12 @@ public class WeatherManager : MonoBehaviour
     {
         if (_isRaining)
         {
-            if (_fadeReflexionCount >= 0) foreach (var material in _materials) material.SetFloat("_Smoothness", _fadeReflexionCount/_fadeInReflexionDuration);
+            if (_fadeReflexionCount >= 0)
+                foreach (var material in _materials)
+                {
+                    material.SetFloat("_Smoothness", (_fadeReflexionCount/_fadeInReflexionDuration)*_reflectionStength);
+                    material.SetFloat("_RippleStrength", _ripplesStength-((_fadeReflexionCount/_fadeInReflexionDuration)*_ripplesStength));
+                }
 
             if (_fadeCloudsCount >= 0)
             {
@@ -76,10 +83,18 @@ public class WeatherManager : MonoBehaviour
         }
         else
         {
-            if (_fadeReflexionCount >= 0) foreach (var material in _materials) material.SetFloat("_Smoothness", 1-_fadeReflexionCount/_fadeOutReflexionDuration);
+            if (_fadeReflexionCount >= 0)
+                foreach (var material in _materials)
+                {
+                    material.SetFloat("_Smoothness", 1-((_fadeReflexionCount/_fadeOutReflexionDuration)*_reflectionStength));
+                }
 
             if (_fadeCloudsCount >= 0)
             {
+                foreach (var material in _materials)
+                {
+                    material.SetFloat("_RippleStrength", _ripplesStength * _fadeReflexionCount / _fadeInReflexionDuration);
+                }
                 float value = Mathf.Clamp(1-_fadeCloudsCount / _fadeOutCloudsDuration,0.5f,1f);
                 _directionalLight.color = new Color(value,value,value,1);
             }

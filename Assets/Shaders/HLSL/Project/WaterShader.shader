@@ -65,15 +65,17 @@ Shader "Learning/Unlit/Water"
 
 
 				// Map UVs directly from world space to keep consistent texture size with scaled water planes.
-				float2 texCoord = i.pixelWorldPos.xz * 0.2F;
+				float2 texCoord = i.pixelWorldPos.xz * 0.05F;
 
 				// Use displacement map to warp texture, and animate according to time (Unity's "_Time.y" = current time).
-				float displace = tex2D(_DispTexture, texCoord - float2(-_Time.y, -_Time.y) * 0.1F).r * 0.2F;
-				float3 texColor = tex2D(_AlbedoTexture, texCoord + displace - float2(_Time.y, -_Time.y) * 0.1F) * tex2D(_AlbedoTexture, texCoord.yx + _Time.y * 0.05F);
+				float3 texColor = tex2D(_AlbedoTexture, texCoord.yx + _Time.y * 0.05F) * tex2D(_AlbedoTexture, texCoord - float2(_Time.y, -_Time.y) * 0.1F);
+
+				float lum = dot(texColor, float3(0.24F, 0.7F, 0.06F));
+				float4 finalColor = lum > 0.3F ? float4(1, 1, 1, 0) : float4(0.2F, 0.5F, 1.0F, 0);
 
 
 				// Water texture, with transparency according to camera angle.
-				float4 finalColor = float4(texColor, 0.0F);//1.0F - dot(dir, nor));
+				//float4 finalColor = float4(texColor, 0.0F);//1.0F - dot(dir, nor));
 
 				// Diffuse lighting.
 				float b = max(0.1F, dot(nor, _WorldSpaceLightPos0));
@@ -81,7 +83,7 @@ Shader "Learning/Unlit/Water"
 
 				// Specular.
 				float3 V = reflect(-dir, nor);
-				finalColor += pow(max(0, dot(V, _WorldSpaceLightPos0.xyz)), 80) * pow(texColor.b + 0.5F, 10) * _LightColor0;
+				finalColor += pow(max(0, dot(V, _WorldSpaceLightPos0.xyz)), 200) * 4 * _LightColor0;
 
 
 				float2 screenUVs = (i.clipPos.xy / i.clipPos.w) * 0.5F + 0.5F;

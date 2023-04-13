@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,10 +5,11 @@ using UnityEngine.Rendering.Universal;
 public class PostProcessManager : MonoBehaviour
 {
     [SerializeField] private PlayerEntity _player;
+    [SerializeField] [Range(1, 5)] private int _lowHpThreshold;
 
     private Volume _postProcessVolume;
     private Vignette _vignette;
-
+    
     private float _vignetteIntensity = 0.0F;
     private float _vignetteIntensityInertia = 0.0F;
 
@@ -24,7 +23,7 @@ public class PostProcessManager : MonoBehaviour
 
     private void Update()
     {
-        bool hurt = _player.Health <= 1;
+        bool hurt = _player.Health <= _lowHpThreshold;
 
         if (hurt)
         {

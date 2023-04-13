@@ -28,7 +28,7 @@ public class PlayerEntity : DamageableEntity
 
     private float _currentAttackRange;
     private float _currentAttackCooldown;
-    private float _currentHealCooldown = 0.0F;
+    private float _currentHealTimer = 0.0F;
     private float _stoppingDistance;
     private int _attackTriggerAnimation;
     private bool _isAttacking;
@@ -80,10 +80,10 @@ public class PlayerEntity : DamageableEntity
     {
         if (_currentHealth < _maxHealth && PlayerHungerThirst.Instance.Hunger > _hungerThreshold)
         {
-            _currentHealCooldown -= Time.deltaTime;
-            if (_currentHealCooldown <= 0.0F)
+            _currentHealTimer -= Time.deltaTime;
+            if (_currentHealTimer <= 0.0F)
             {
-                _currentHealCooldown = _healCooldown;
+                _currentHealTimer = _healCooldown;
                 PlayerHungerThirst.Instance.DecreaseHungerOnHealth(_hungerToLoseOnHealt);
                 Heal(1);
             }

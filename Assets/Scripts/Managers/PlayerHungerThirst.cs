@@ -14,8 +14,11 @@ public class PlayerHungerThirst : MonoBehaviour
     [SerializeField] private float _thirstBaseDegrade = 0.3F;
 	[SerializeField] private float _walkMultiplier = 1.5F;
     [SerializeField] private float _sprintMultiplier = 4.0F;
+    [SerializeField] private float _loseHealthCooldown = 10F;
 
-    private PlayerMovement playerMovement;
+    private PlayerMovement _playerMovement;
+    private PlayerEntity _playerEntity;
+    private float _loseHealthTimer = 0.0F;
 
     // Actual meters.
     [SerializeField] private float _hunger = 100.0F;
@@ -30,7 +33,8 @@ public class PlayerHungerThirst : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        playerMovement = GetComponent<PlayerMovement>();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerEntity = GetComponent<PlayerEntity>();
         OnUpdate?.Invoke();
     }
 
@@ -38,12 +42,12 @@ public class PlayerHungerThirst : MonoBehaviour
 	{
 		float hunger = _hungerBaseDegrade * Time.deltaTime;
         float thirst = _thirstBaseDegrade * Time.deltaTime;
-        if (playerMovement.IsSprinting)
+        if (_playerMovement.IsSprinting)
         {
             hunger *= _sprintMultiplier;
             thirst *= _sprintMultiplier;
         }
-        else if (playerMovement.IsWalking)
+        else if (_playerMovement.IsWalking)
         {
             hunger *= _walkMultiplier;
             thirst *= _walkMultiplier;
@@ -54,6 +58,17 @@ public class PlayerHungerThirst : MonoBehaviour
         _thirst -= thirst;
         if (_hunger < 0.0F) _hunger = 0.0F;
         if (_thirst < 0.0F) _thirst = 0.0F;
+
+        if (_hunger <= 0.0F && _thirst <= 0.0F)
+        {
+            _loseHealthTimer -= Time.deltaTime;
+
+            if (_loseHealthTimer <= 0)
+            {
+                _playerEntity.TakeDamage(1);
+                _loseHealthTimer = _loseHealthCooldown;
+            }
+        }
 
         OnUpdate?.Invoke();
     }

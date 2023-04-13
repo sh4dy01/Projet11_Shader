@@ -3541,7 +3541,7 @@ Transform:
   - {fileID: 1125060542079124604}
   - {fileID: 3502766892231587056}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8731848667064868346
 Animator:
@@ -3722,8 +3722,8 @@ MonoBehaviour:
   _thirstBaseDegrade: 0.3
   _walkMultiplier: 1.5
   _sprintMultiplier: 4
-  _hunger: 100
-  _thirst: 100
+  _hunger: 60
+  _thirst: 40
 --- !u!114 &4904177944334428461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3761,6 +3761,7 @@ MonoBehaviour:
   _hitEffectController: {fileID: 0}
   _healCooldown: 5
   _hungerThreshold: 65
+  _hungerToLoseOnHealt: 5
   _projectileToSpawn: {fileID: 1800454785169259140, guid: cff4c024d20095a458a66e6e0d47bf1b,
     type: 3}
   _projectileSpawnLocation: {fileID: 7201966501699174314}
@@ -3770,7 +3771,6 @@ MonoBehaviour:
   _meleeAttackRange: 2
   _attackCooldown: 1
   _attackRangeCooldown: 1.7
-  _attackRangeOffset: 0.1
 --- !u!195 &5406390013940768369
 NavMeshAgent:
   m_ObjectHideFlags: 0

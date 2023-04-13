@@ -25,7 +25,6 @@ public class PlayerEntity : DamageableEntity
     [SerializeField] float _meleeAttackRange = 1f;
     [SerializeField] float _attackCooldown = 1f;
     [SerializeField] float _attackRangeCooldown = 3f;
-    [SerializeField] float _attackRangeOffset = 0.1f;
 
     private float _currentAttackRange;
     private float _currentAttackCooldown;
@@ -34,7 +33,6 @@ public class PlayerEntity : DamageableEntity
     private int _attackTriggerAnimation;
     private bool _isAttacking;
     private bool _isInCooldown;
-    private bool _isRangeAttack;
     private DamageableEnemy _target;
     private CollectibleItem _item;
     private NavMeshAgent _navMeshAgent;
@@ -101,7 +99,7 @@ public class PlayerEntity : DamageableEntity
 
     private bool IsInRange()
     {
-        return Vector3.Distance(transform.position, _target.transform.position) <= _currentAttackRange + _attackRangeOffset;
+        return Vector3.Distance(transform.position, _target.transform.position) <= _currentAttackRange;
     }
     
     public void MeleeAttack(DamageableEnemy enemy)
@@ -109,7 +107,6 @@ public class PlayerEntity : DamageableEntity
         _currentAttackRange = _meleeAttackRange + _stoppingDistance;
         _attackTriggerAnimation = MeleeAttackTrigger;
         _currentAttackCooldown = _attackCooldown;
-        _isRangeAttack = false;
         _axeGameObject.SetActive(true);
         SetAttackTarget(enemy);
     }
@@ -119,7 +116,6 @@ public class PlayerEntity : DamageableEntity
         _currentAttackRange = _distanceAttackRange + _stoppingDistance;
         _attackTriggerAnimation = RangeAttackTrigger;
         _currentAttackCooldown = _attackRangeCooldown;
-        _isRangeAttack = true;
         _axeGameObject.SetActive(false);
         SetAttackTarget(enemy);
     }

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3323088227415366520
 MonoBehaviour:
@@ -52,12 +52,14 @@ MonoBehaviour:
   _reflectionIntensity: 0
   _minRainDuration: 20
   _maxRainDuration: 100
-  _minRainInterval: 25
+  _minRainInterval: 50
   _maxRainInterval: 150
+  _ripplesStength: 0.2
+  _reflectionStength: 1
   _fadeInReflexionDuration: 20
   _fadeOutReflexionDuration: 10
-  _fadeInCloudsDuration: 40
-  _fadeOutCloudsDuration: 120
+  _fadeInCloudsDuration: 5
+  _fadeOutCloudsDuration: 5
   _directionalLight: {fileID: 0}
   _secondsPerDay: 360
   _timer: 0

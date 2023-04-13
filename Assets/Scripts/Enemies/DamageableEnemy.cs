@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class DamageableEnemy : DamageableEntity
 {
+    [SerializeField] private GameObject[] _itemToDrop;
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float _playerRange = 5f;
     
@@ -19,6 +20,8 @@ public class DamageableEnemy : DamageableEntity
         _agent.speed = _speed;
         
         CurrentOutlineMaterial = GameManager.Instance.EnemyOutlineMaterial;
+        
+        OnDeath += DropItem;
     }
     
     private void Update()
@@ -27,6 +30,11 @@ public class DamageableEnemy : DamageableEntity
         {
             _agent.SetDestination(_player.position);
         }
+    }
+
+    private void DropItem()
+    {
+        Instantiate(_itemToDrop[Random.Range(0, _itemToDrop.Length)], transform.position, Quaternion.identity);
     }
 
     private bool IsInRange()

@@ -10,6 +10,8 @@ public class HUD : MonoBehaviour
 	[SerializeField] private Image _hungerBar;
 	[SerializeField] private Image _thirstBar;
 	[SerializeField] private Image _healthBar;
+
+	[SerializeField] private Material _HealthMaterial;
 	
 	private void Awake()
 	{
@@ -32,5 +34,6 @@ public class HUD : MonoBehaviour
 	private void UpdateHealth()
 	{
 		_healthBar.fillAmount = (float)playerEntity.Health / (float)playerEntity.MaxHealth;
+		_HealthMaterial.SetFloat("_Health", (float)playerEntity.Health / (float)playerEntity.MaxHealth);
 	}
 }

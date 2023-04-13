@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerHungerThirst : MonoBehaviour
 {
+    private static PlayerHungerThirst _instance = null;
+    public static PlayerHungerThirst Instance => _instance;
+
 	[Header("Hunger & Thirst Mechanics")]
 	[SerializeField] private float _hungerBaseDegrade = 0.1F;
     [SerializeField] private float _thirstBaseDegrade = 0.3F;
@@ -26,6 +29,7 @@ public class PlayerHungerThirst : MonoBehaviour
 
     private void Awake()
     {
+        _instance = this;
         playerMovement = GetComponent<PlayerMovement>();
     }
 

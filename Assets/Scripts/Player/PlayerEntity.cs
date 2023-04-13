@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerEntity : DamageableEntity
 {
@@ -22,6 +23,7 @@ public class PlayerEntity : DamageableEntity
 
     private float _currentAttackRange;
     private float _currentAttackCooldown;
+    private float _currentHealCooldown = 0.0F;
     private float _stoppingDistance;
     private int _attackTriggerAnimation;
     private bool _isAttacking;
@@ -72,6 +74,16 @@ public class PlayerEntity : DamageableEntity
 
     private void Update()
     {
+        if (PlayerHungerThirst.Instance.Hunger > 85.0F)
+        {
+            _currentHealCooldown -= Time.deltaTime;
+            if (_currentHealCooldown <= 0.0F)
+            {
+                _currentHealCooldown = 10.0F;
+                Heal(1);
+            }
+        }
+
         if (!_isAttacking || !_target) return;
 
         if (!_isInCooldown && IsInRange())
@@ -168,7 +180,11 @@ public class PlayerEntity : DamageableEntity
 
     protected override void Die()
     {
-        //DieEffect();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ReloadScene();
+    }
+    
+    private static void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -26,11 +26,22 @@ public class DamageableEntity : OutlineObject
         _currentHealth = _maxHealth;
     }
 
+    public void Heal(int amount)
+    {
+        _currentHealth += amount;
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        OnHit?.Invoke();
+    }
+
     public void TakeDamage(int damage)
     {
         if (_currentHealth <= 0) return;
         
-        _currentHealth = Mathf.Clamp(_currentHealth -= damage, 0, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
         OnHit?.Invoke();
         
         Debug.Log(gameObject.name + " took " + damage + " damage. Current health: " + _currentHealth);
@@ -45,9 +56,9 @@ public class DamageableEntity : OutlineObject
 
     protected virtual void Die()
     {
+        DieEffect(RemoveObject);
         OnDeath?.Invoke();
         _isDead = true;
-        DieEffect();
     }
 
     protected virtual void HitEffect()
@@ -58,11 +69,11 @@ public class DamageableEntity : OutlineObject
         }
     }
     
-    protected virtual void DieEffect()
+    protected virtual void DieEffect(Action callback)
     {
         if (_dissolveController)
         {
-            _dissolveController.Dissolve(RemoveObject);
+            _dissolveController.Dissolve(callback);
         }
     }
     

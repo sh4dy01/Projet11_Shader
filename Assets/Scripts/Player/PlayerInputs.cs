@@ -11,14 +11,15 @@ namespace StarterAssets
 		[Header("Interaction Settings")]
 		[SerializeField] private float _rayMaxDistance = 20f;
 		[SerializeField] LayerMask _clickableLayerMask;
-		
+		[SerializeField] private GameObject _torch;
+
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		
 		private Camera _mainCamera;
 		private NavMeshAgent _navMeshAgent;
 		private PlayerEntity playerEntity;
-		
+
 		public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
 		private void Awake()
@@ -47,6 +48,16 @@ namespace StarterAssets
 			{
 				SprintInput(false);
 			}
+
+			if (Input.GetKeyDown(KeyCode.F))
+			{
+				SwitchActiveTorch();
+			}
+		}
+
+		private void SwitchActiveTorch()
+		{
+			_torch.SetActive(!_torch.activeSelf);
 		}
 
 		public void LeftClickInput()

@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 5160934633495826803}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6504404955986157403
 MonoBehaviour:
@@ -9747,7 +9747,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.1022344
+  m_Intensity: 2.1676388
   m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerEntity : DamageableEntity
 {
@@ -179,7 +180,11 @@ public class PlayerEntity : DamageableEntity
 
     protected override void Die()
     {
-        //DieEffect();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ReloadScene();
+    }
+    
+    private static void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -6,7 +6,7 @@ public class DamageableEnemy : DamageableEntity
 {
     [SerializeField] private float _speed = 3.5f;
     [SerializeField] private float _playerRange = 5f;
-    
+
     [Header("Drop Settings")]
     [SerializeField] private GameObject[] _itemToDrop;
     [SerializeField] [Range(0, 100)] private float _dropRate = 75;
@@ -26,7 +26,7 @@ public class DamageableEnemy : DamageableEntity
         
         OnDeath += DropItem;
     }
-    
+
     private void Update()
     {
         if (!IsDead && IsInRange())

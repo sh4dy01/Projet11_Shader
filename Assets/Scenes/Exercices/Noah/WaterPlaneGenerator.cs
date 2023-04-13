@@ -20,11 +20,6 @@ public class WaterPlaneGenerator : MonoBehaviour
 		Make();
 	}
 
-	private void Update()
-	{
-		
-	}
-
 	void Make()
 	{
 		List<Vector3> vertices = new List<Vector3>();
@@ -53,9 +48,9 @@ public class WaterPlaneGenerator : MonoBehaviour
 
 
         // ... and set the mesh buffers. 
-        _meshFilter.sharedMesh.vertices = vertices.ToArray();
-        _meshFilter.sharedMesh.normals = normals.ToArray();
-        _meshFilter.sharedMesh.triangles = indices.ToArray();
+        _meshFilter.mesh.vertices = vertices.ToArray();
+        _meshFilter.mesh.normals = normals.ToArray();
+        _meshFilter.mesh.triangles = indices.ToArray();
 
         // Apply the material.
         //_meshRenderer.material = _MeshMaterial != null ? _MeshMaterial : new Material(Shader.Find("Learning/Unlit/Shader_Noah"));
